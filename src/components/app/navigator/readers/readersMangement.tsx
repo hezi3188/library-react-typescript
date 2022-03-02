@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Reader } from '../../../models/reader';
-import { LOAD_READERS } from '../../../GraphQL/Queries';
-import { RootState } from '../../../redux/store';
-import { decrement, increment } from '../../../redux/counter';
+import Reader from '../../../../models/reader';
+import { LOAD_READERS } from '../../../../GraphQL/Queries';
+import { RootState } from '../../../../redux/store';
+import { login, logOut } from '../../../../redux/auth';
 
 const ReadersMangement: React.FC = () => {
-  const count = useSelector<RootState, number>((state) => state.counter.value);
+  const count = useSelector<RootState, Reader>((state) => state.auth.loginUser);
   const dispatch = useDispatch();
   const { error, loading, data } = useQuery(LOAD_READERS);
   const [readers, setReaders] = useState<Reader[]>([]);
@@ -18,7 +18,7 @@ const ReadersMangement: React.FC = () => {
       setReaders(data.allReaders.nodes);
     }
   }, [data]);
-  
+
   if (loading) {
     return <CircularProgress />;
   }
@@ -27,25 +27,11 @@ const ReadersMangement: React.FC = () => {
   }
   return (
     <div>
-      <div>
-        <div>
-          <button
-            aria-label='Increment value'
-            onClick={() => dispatch(increment())}
-          >
-            Increment
-          </button>
-          <span>{count}</span>
-          <button
-            aria-label='Decrement value'
-            onClick={() => dispatch(decrement())}
-          >
-            Decrement
-          </button>
-        </div>
-      </div>
+      <div></div>
       {readers.map((val: Reader) => {
-        return <h1> {val.firstName}</h1>;
+        if (val !== undefined) {
+          return <h1> {val.firstName}</h1>;
+        }
       })}
     </div>
   );

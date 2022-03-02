@@ -2,25 +2,22 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useSelector, useDispatch } from 'react-redux';
-import Box from '@mui/material/Box';
+import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
-import { Reader } from '../../models/reader';
-import { LOAD_READERS } from '../../GraphQL/Queries';
-import { RootState } from '../../redux/store';
-import { decrement, increment } from '../../redux/counter';
+import Reader from '../../../models/reader';
+import { LOAD_READERS } from '../../../GraphQL/Queries';
+import { login } from '../../../redux/auth';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-const ReadersMangement: React.FC = () => {
-  const count = useSelector<RootState, number>((state) => state.counter.value);
+const Login: React.FC = () => {
   const dispatch = useDispatch();
   const { error, loading, data } = useQuery(LOAD_READERS);
   const [readers, setReaders] = useState<Reader[]>([]);
-  const [selectedReader, setSelectedReader] = useState<string>('');
+  const [selectedReader, setSelectedReader] = useState<number>();
   useEffect(() => {
     if (data) {
       setReaders(data.allReaders.nodes);
@@ -34,7 +31,17 @@ const ReadersMangement: React.FC = () => {
     return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
   }
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectedReader(event.target.value as string);
+    setSelectedReader(parseInt(event.target.value));
+    console.log(event.target.value);
+  };
+  const loginUserHandle = () => {
+    dispatch(
+      login(
+        readers.filter(
+          (item) => item !== undefined && item.id === selectedReader
+        )[0]
+      )
+    );
   };
   return (
     <div
@@ -60,21 +67,33 @@ const ReadersMangement: React.FC = () => {
 
       <FormControl style={{ margin: '40px', width: '50vh' }}>
         <InputLabel>בחר משתמש להתחברות</InputLabel>
-        <Select value={selectedReader} label='Age' onChange={handleChange}>
+        <Select
+          value={selectedReader?.toString()}
+          label='בחר משתמש להתחברות'
+          onChange={handleChange}
+        >
           {readers.map((val: Reader) => {
-            return (
-              <MenuItem key={val.id} value={val.id}>
-                {val.firstName} {val.lastName}
-              </MenuItem>
-            );
+            if (val !== undefined) {
+              return (
+                <MenuItem key={val.id} value={val.id}>
+                  {val.firstName} {val.lastName}
+                </MenuItem>
+              );
+            }
           })}
         </Select>
       </FormControl>
-      <Button style={{ margin: '40px' }} color='success' variant='contained'>
+      <Button
+        disabled={selectedReader === undefined}
+        onClick={loginUserHandle}
+        style={{ margin: '40px' }}
+        color='success'
+        variant='contained'
+      >
         התחבר
       </Button>
     </div>
   );
 };
 
-export default ReadersMangement;
+export default Login;

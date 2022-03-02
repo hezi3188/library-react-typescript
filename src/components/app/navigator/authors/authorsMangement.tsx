@@ -2,15 +2,15 @@ import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { Book } from '../../../models/book';
-import { LOAD_BOOKS } from '../../../GraphQL/Queries';
+import { Author } from '../../../../models/author';
+import { LOAD_AUTHORS } from '../../../../GraphQL/Queries';
 
-const BooksMangement: React.FC = () => {
-  const { error, loading, data } = useQuery(LOAD_BOOKS);
-  const [books, setBooks] = useState<Book[]>([]);
+const AuthorsMangement: React.FC = () => {
+  const { error, loading, data } = useQuery(LOAD_AUTHORS);
+  const [authors, setAuthors] = useState<Author[]>([]);
   useEffect(() => {
     if (data) {
-      setBooks(data.allBooks.nodes);
+      setAuthors(data.allAuthors.nodes);
     }
   }, [data]);
   if (loading) {
@@ -22,11 +22,11 @@ const BooksMangement: React.FC = () => {
   return (
     <div>
       ff
-      {books.map((val: Book) => {
-        return <h1> {val.name}</h1>;
+      {authors.map((val: Author) => {
+        return <h1> {val.firstName}</h1>;
       })}
     </div>
   );
 };
 
-export default BooksMangement;
+export default AuthorsMangement;
