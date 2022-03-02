@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Reader } from '../../../models/reader';
 import { LOAD_READERS } from '../../../GraphQL/Queries';
 import { RootState } from '../../../redux/store';
-import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment } from '../../../redux/counter';
+
 const ReadersMangement: React.FC = () => {
   const count = useSelector<RootState, number>((state) => state.counter.value);
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ReadersMangement: React.FC = () => {
       setReaders(data.allReaders.nodes);
     }
   }, [data]);
+  
   if (loading) {
     return <CircularProgress />;
   }
