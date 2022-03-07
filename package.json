@@ -6,6 +6,7 @@
     "@apollo/client": "^3.5.9",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.4.4",
     "@mui/material": "^5.4.3",
     "@mui/styles": "^5.4.4",
     "@reduxjs/toolkit": "^1.8.0",

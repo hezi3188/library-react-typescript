@@ -3,7 +3,6 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
   root: {
     border: '1px solid',
-    height: '98vh',
     margin: '4px',
   },
   menu: {

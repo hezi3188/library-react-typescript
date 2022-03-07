@@ -34,3 +34,12 @@ export const LOAD_AUTHORS = gql`
     }
   }
 `;
+
+export const GET_BOOK = gql`
+  query MyQuery($id: Int = 5) {
+    bookById(id: $id) {
+      id
+      name
+    }
+  }
+`;
