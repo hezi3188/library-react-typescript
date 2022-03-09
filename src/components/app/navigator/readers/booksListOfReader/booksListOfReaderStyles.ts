@@ -9,4 +9,9 @@ export const useStyles = makeStyles({
     height: '90%',
     width: '98%',
   },
+  upContainer:{
+    display: 'flex',
+    flexDirection: "row",
+    justifyContent:"space-between",
+  }
 });

@@ -18,6 +18,7 @@ import { useStyles } from './booksListOfReaderStyles';
 import Container from '../../../../../comons/container/container';
 import CustomCard from '../../../../../comons/customCard/card';
 import useBooksListOfReader from './useBooksListOfReader';
+import { Button } from '@mui/material';
 
 interface Props {
   readerData: Reader;
@@ -54,9 +55,19 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     <div className={classes.root}>
       <Container>
         {readerData && (
-          <Typography variant='h6'>
-            הספרים של {readerData.firstName} {readerData.lastName}{' '}
-          </Typography>
+          <div className={classes.upContainer}>
+            <Typography variant='h6'>
+              הספרים של{' '}
+              <strong>
+                {' '}
+                {readerData.firstName} {readerData.lastName}
+              </strong>
+              :
+            </Typography>
+            <Button color='success' variant='contained'>
+              הוסף ספר
+            </Button>
+          </div>
         )}
         {books.map((val: Book) => {
           if (val !== undefined) {
