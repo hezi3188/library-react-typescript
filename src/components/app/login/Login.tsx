@@ -16,12 +16,14 @@ import useLogin from './useLogin';
 
 const Login: React.FC = () => {
   const classes = useStyles();
-  const { error, loading, data } = useQuery(LOAD_READERS);
+  const { error, loading, data } = useQuery(LOAD_READERS, {
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'network-only',
+  });
   const [readers, setReaders] = useState<Reader[]>([]);
   const [selectedReader, setSelectedReader] = useState<number>();
   const { loginUser } = useLogin({
     readers: readers,
-    selectedReader: selectedReader as number,
   });
   useEffect(() => {
     if (data) {
@@ -71,7 +73,11 @@ const Login: React.FC = () => {
       <div className={classes.loginBtn}>
         <Button
           disabled={selectedReader === undefined}
-          onClick={() => loginUser(readers)}
+          onClick={() => {
+            if (selectedReader !== undefined) {
+              loginUser(selectedReader);
+            }
+          }}
           color='success'
           variant='contained'
         >

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { Book } from '../../../../models/book';
+import Book from '../../../../models/book';
 import { LOAD_BOOKS } from '../../../../GraphQL/Queries';
 
 const BooksMangement: React.FC = () => {
@@ -23,7 +23,9 @@ const BooksMangement: React.FC = () => {
     <div>
       ff
       {books.map((val: Book) => {
-        return <h1> {val.name}</h1>;
+        if (val !== undefined) {
+          return <h1> {val.name}</h1>;
+        }
       })}
     </div>
   );

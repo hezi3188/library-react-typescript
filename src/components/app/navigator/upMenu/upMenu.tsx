@@ -1,9 +1,11 @@
 import { Button, Typography } from '@mui/material';
 import React from 'react';
-import { useStyles } from './upMenuStyles';
 import { useSelector } from 'react-redux';
+
+import { useStyles } from './upMenuStyles';
 import { RootState } from '../../../../redux/store';
 import Reader from '../../../../models/reader';
+import Book from '../../../../models/book';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../../../redux/auth';
 
@@ -12,6 +14,9 @@ const Menu: React.FC = () => {
   const classes = useStyles();
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
+  );
+  const favoriteBook = useSelector<RootState, Book>(
+    (state) => state.auth.favoriteBook
   );
 
   return (
@@ -27,7 +32,7 @@ const Menu: React.FC = () => {
             שלום {loginUser?.firstName} {loginUser?.lastName}
           </Typography>
           <Typography align='center' variant='h6'>
-            הספר המועדף עליך:
+            הספר המועדף עליך: {favoriteBook?.name}
           </Typography>
         </div>
         <div>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import ReadersMangement from './readers/readersMangement';
 import AuthorsMangement from './authors/authorsMangement';
 import BooksMangement from './books/booksMangement';
@@ -9,7 +10,6 @@ import { useStyles } from './navigatorStyles';
 
 const Navigator: React.FC = () => {
   const classes = useStyles();
-
   return (
     <BrowserRouter>
       <div className={classes.root}>
@@ -28,10 +28,6 @@ const Navigator: React.FC = () => {
             </Routes>
           </div>
         </div>
-        {/* <nav>
-        <Link to='/'>Readers</Link>|<Link to='books'>Books</Link>|
-        <Link to='authors'>Authors</Link>
-      </nav> */}
       </div>
     </BrowserRouter>
   );

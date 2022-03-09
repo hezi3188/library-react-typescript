@@ -1,18 +1,26 @@
-import { UseLoginInput, UseLoginOutput } from './useAddTodoInterfaces';
+import { useLazyQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../redux/auth';
+
+import { UseLoginInput, UseLoginOutput } from './useAddTodoInterfaces';
+import { login, selectFavorite } from '../../../redux/auth';
+import { GET_BOOK } from '../../../GraphQL/Queries';
 
 const useAddTodo = (props: UseLoginInput): UseLoginOutput => {
-  const { readers, selectedReader } = props;
+  const { readers } = props;
   const dispatch = useDispatch();
+  const getUser = (selectedReader: number) =>
+    readers.filter((item) => item?.id === selectedReader)[0];
+  const [getBook] = useLazyQuery(GET_BOOK, {
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'network-only',
+  });
 
-  const loginUser = () => {
-    dispatch(
-      login(
-        readers.filter(
-          (item) => item !== undefined && item.id === selectedReader
-        )[0]
-      )
+  const loginUser = (selectedReader: number) => {
+    dispatch(login(getUser(selectedReader)));
+    getBook({ variables: { id: getUser(selectedReader)?.favoriteBook } }).then(
+      (item) => {
+        dispatch(selectFavorite(item.data.bookById));
+      }
     );
   };
 
