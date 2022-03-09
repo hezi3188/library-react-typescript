@@ -20,18 +20,18 @@ import CustomCard from '../../../../../comons/customCard/card';
 import useBooksListOfReader from './useBooksListOfReader';
 
 interface Props {
-  readerId: number | undefined;
+  readerData: Reader;
 }
 
 const BooksListOfReader: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const { readerId } = props;
+  const { readerData } = props;
 
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
   );
   const { loading, error, data } = useQuery(GET_BOOKS_OF_USER, {
-    variables: { equalTo: readerId },
+    variables: { equalTo: readerData?.id },
   });
 
   const [books, setBooks] = useState<Book[]>([]);
@@ -46,13 +46,18 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   if (loading) {
     return <CircularProgress />;
   }
-  if (error && readerId !== undefined) {
+  if (error && readerData !== undefined) {
     return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
   }
 
   return (
     <div className={classes.root}>
       <Container>
+        {readerData && (
+          <Typography variant='h6'>
+            הספרים של {readerData.firstName} {readerData.lastName}{' '}
+          </Typography>
+        )}
         {books.map((val: Book) => {
           if (val !== undefined) {
             return (
@@ -65,7 +70,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
                     שם: {val.name}
                   </Typography>
                 </CardContent>
-                {readerId === loginUser?.id && (
+                {readerData?.id === loginUser?.id && (
                   <CardActions sx={{ direction: 'rtl' }}>
                     <IconButton>
                       <DeleteIcon color='error' />

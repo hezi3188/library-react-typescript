@@ -17,12 +17,12 @@ import Container from '../../../../../comons/container/container';
 import CustomCard from '../../../../../comons/customCard/card';
 
 interface Props {
-  getReaderId: (readerId: number) => void;
+  getReaderData: (reader: Reader) => void;
 }
 
 const ReadersList: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const { getReaderId } = props;
+  const { getReaderData } = props;
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
   );
@@ -48,7 +48,7 @@ const ReadersList: React.FC<Props> = (props) => {
           if (val !== undefined) {
             return (
               <CustomCard>
-                <CardContent onClick={() => getReaderId(val.id)}>
+                <CardContent onClick={() => getReaderData(val)}>
                   <Typography variant='h5' component='div'>
                     מזהה: {val.id}
                   </Typography>
