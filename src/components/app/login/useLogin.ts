@@ -1,7 +1,7 @@
 import { useLazyQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 
-import { UseLoginInput, UseLoginOutput } from './useAddTodoInterfaces';
+import { UseLoginInput, UseLoginOutput } from './useLoginInterfaces';
 import { login, selectFavorite } from '../../../redux/auth';
 import { GET_BOOK } from '../../../GraphQL/Queries';
 

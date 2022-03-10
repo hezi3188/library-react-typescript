@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import { Button } from '@mui/material';
 
 import Book from '../../../../../models/book';
 import Reader from '../../../../../models/reader';
@@ -18,7 +19,7 @@ import { useStyles } from './booksListOfReaderStyles';
 import Container from '../../../../../comons/container/container';
 import CustomCard from '../../../../../comons/customCard/card';
 import useBooksListOfReader from './useBooksListOfReader';
-import { Button } from '@mui/material';
+import AddBookDialog from './addBookDialog/addBookDialog';
 
 interface Props {
   readerData: Reader;
@@ -32,10 +33,14 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     (state) => state.auth.loginUser
   );
   const { loading, error, data } = useQuery(GET_BOOKS_OF_USER, {
+    fetchPolicy: 'network-only',
+    nextFetchPolicy: 'network-only',
     variables: { equalTo: readerData?.id },
   });
 
   const [books, setBooks] = useState<Book[]>([]);
+  const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
+
   const { selectFavorite } = useBooksListOfReader({ books: books });
 
   useEffect(() => {
@@ -50,11 +55,17 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   if (error && readerData !== undefined) {
     return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
   }
+  let isUser: boolean = readerData?.id === loginUser?.id;
 
   return (
     <div className={classes.root}>
+      <AddBookDialog
+        open={openAddDialog}
+        addBookToUser={(book: Book) => setBooks([...books, book])}
+        onClose={() => setOpenAddDialog(false)}
+      />
       <Container>
-        {readerData && (
+        {readerData && isUser && (
           <div className={classes.upContainer}>
             <Typography variant='h6'>
               הספרים של{' '}
@@ -64,7 +75,11 @@ const BooksListOfReader: React.FC<Props> = (props) => {
               </strong>
               :
             </Typography>
-            <Button color='success' variant='contained'>
+            <Button
+              onClick={() => setOpenAddDialog(true)}
+              color='success'
+              variant='contained'
+            >
               הוסף ספר
             </Button>
           </div>
@@ -81,7 +96,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
                     שם: {val.name}
                   </Typography>
                 </CardContent>
-                {readerData?.id === loginUser?.id && (
+                {isUser && (
                   <CardActions sx={{ direction: 'rtl' }}>
                     <IconButton>
                       <DeleteIcon color='error' />
