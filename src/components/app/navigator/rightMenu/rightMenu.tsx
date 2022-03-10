@@ -3,6 +3,10 @@ import React from 'react';
 import { useStyles } from './rightMenuStyles';
 import { useNavigate } from 'react-router-dom';
 
+const USER_MANGE_TITLE: string = 'ניהול משתמשים';
+const AUTHOR_MANGE_TITLE: string = 'ניהול סופרים';
+const BOOKS_MANGE_TITLE: string = 'ניהול ספרים';
+
 const Menu: React.FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
@@ -15,7 +19,7 @@ const Menu: React.FC = () => {
         variant='text'
         onClick={() => navigate('/')}
       >
-        ניהול משתמשים
+        {USER_MANGE_TITLE}
       </Button>
       <Button
         size='large'
@@ -23,7 +27,7 @@ const Menu: React.FC = () => {
         variant='text'
         onClick={() => navigate('authors')}
       >
-        ניהול סופרים
+        {AUTHOR_MANGE_TITLE}
       </Button>
       <Button
         size='large'
@@ -31,7 +35,7 @@ const Menu: React.FC = () => {
         variant='text'
         onClick={() => navigate('books')}
       >
-        ניהול ספרים
+        {BOOKS_MANGE_TITLE}
       </Button>
     </div>
   );

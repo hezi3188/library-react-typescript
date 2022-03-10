@@ -17,7 +17,7 @@ const AuthorsMangement: React.FC = () => {
     return <CircularProgress />;
   }
   if (error) {
-    return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
+    return <h1>ה</h1>;
   }
   return (
     <div>

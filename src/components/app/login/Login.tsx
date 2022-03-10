@@ -13,6 +13,11 @@ import { LOAD_READERS } from '../../../GraphQL/Queries';
 import Reader from '../../../models/reader';
 import { useStyles } from './loginStyles';
 import useLogin from './useLogin';
+import {ERROR_DB} from '../../../utils/strings'
+
+const LIBRARY_TITLE: string = 'הספריה';
+const CHOOSE_READER: string = 'בחר משתמש להתחברות';
+const LOGIN_TITLE: string = 'התחבר';
 
 const Login: React.FC = () => {
   const classes = useStyles();
@@ -35,7 +40,7 @@ const Login: React.FC = () => {
     return <CircularProgress />;
   }
   if (error) {
-    return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
+    return <h1>{ERROR_DB}</h1>;
   }
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedReader(parseInt(event.target.value));
@@ -49,16 +54,12 @@ const Login: React.FC = () => {
         align='center'
         variant='h1'
       >
-        הספריה
+        {LIBRARY_TITLE}
       </Typography>
 
       <FormControl className={classes.select}>
-        <InputLabel>בחר משתמש להתחברות</InputLabel>
-        <Select
-          value={selectedReader?.toString()}
-          label='בחר משתמש להתחברות'
-          onChange={handleChange}
-        >
+        <InputLabel>{CHOOSE_READER}</InputLabel>
+        <Select value={selectedReader?.toString()} onChange={handleChange}>
           {readers.map((val: Reader) => {
             if (val !== undefined) {
               return (
@@ -81,7 +82,7 @@ const Login: React.FC = () => {
           color='success'
           variant='contained'
         >
-          התחבר
+          {LOGIN_TITLE}
         </Button>
       </div>
     </div>

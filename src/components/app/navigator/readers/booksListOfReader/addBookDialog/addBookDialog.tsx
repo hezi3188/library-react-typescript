@@ -20,10 +20,10 @@ import Book from '../../../../../../models/book';
 import { ALL_BOOKS_DONT_READ_OF_USER } from '../../../../../../GraphQL/Queries';
 import useAddBookDialog from './useAddBookDialog';
 
-const NO_BOOKS = 'משתמש זה כבר השאיל את כל הספרים הקיימים בספריה!';
-const ADD_BOOK_TITLE = 'הוסף ספר';
-const ADD_BOOK_BUTTON = 'הוסף';
-const CHOOSE_BOOK = 'בחר ספר';
+const NO_BOOKS: string = 'משתמש זה כבר השאיל את כל הספרים הקיימים בספריה!';
+const ADD_BOOK_TITLE: string = 'הוסף ספר';
+const ADD_BOOK_BUTTON: string = 'הוסף';
+const CHOOSE_BOOK: string = 'בחר ספר';
 
 interface Props {
   open: boolean;
