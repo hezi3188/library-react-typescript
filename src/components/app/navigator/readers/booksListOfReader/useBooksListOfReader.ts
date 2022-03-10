@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { DELETE_BOOK_TO_USER } from '../../../../../GraphQL/Queries';
 import { SELECT_FAVORITE_BOOK } from '../../../../../GraphQL/Queries';
 import { RootState } from '../../../../../redux/store';
 import Reader from '../../../../../models/reader';
@@ -14,13 +15,14 @@ import {
 const useBooksListOfReader = (
   props: UseBooksListOfReaderInput
 ): UseBooksListOfReaderOutput => {
-  const { books } = props;
+  const { books, setBooks } = props;
   const dispatch = useDispatch();
   const [selectFavoriteDb] = useMutation(SELECT_FAVORITE_BOOK);
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
   );
-  
+  const [deleteBookToUser] = useMutation(DELETE_BOOK_TO_USER);
+
   const selectFavoriteHandle = (favoriteId: number | undefined) => {
     selectFavoriteDb({
       variables: { favoriteBook: favoriteId, id: loginUser?.id },
@@ -31,8 +33,17 @@ const useBooksListOfReader = (
     });
   };
 
+  const deleteBook = (id: number) => {
+    deleteBookToUser({
+      variables: { readerId: loginUser?.id, bookId: id },
+    }).then(() => {
+      setBooks(books.filter((book: Book) => book?.id !== id));
+    });
+  };
+
   return {
     selectFavorite: selectFavoriteHandle,
+    deleteBook: deleteBook,
   };
 };
 export default useBooksListOfReader;

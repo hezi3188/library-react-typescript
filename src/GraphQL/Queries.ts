@@ -84,6 +84,17 @@ export const ADD_BOOK_TO_USER = gql`
     }
   }
 `;
+export const DELETE_BOOK_TO_USER = gql`
+  mutation MyMutation($bookId: Int!, $readerId: Int!) {
+    deleteBooksListByReaderIdAndBookId(
+      input: { readerId: $readerId, bookId: $bookId }
+    ) {
+      booksList {
+        bookId
+      }
+    }
+  }
+`;
 export const ALL_BOOKS_DONT_READ_OF_USER = gql`
   query MyQuery($equalTo: Int) {
     allBooks(

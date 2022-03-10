@@ -42,8 +42,12 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
+  const [selectedBook, setSelectedBook] = useState<number>();
 
-  const { selectFavorite } = useBooksListOfReader({ books: books });
+  const { selectFavorite, deleteBook } = useBooksListOfReader({
+    books: books,
+    setBooks: setBooks,
+  });
 
   useEffect(() => {
     if (data) {
@@ -59,6 +63,10 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   }
   let isUser: boolean = readerData?.id === loginUser?.id;
 
+  const deleteHandle = (id: number) => {
+    setOpenDeleteDialog(true);
+    setSelectedBook(id);
+  };
   return (
     <div className={classes.root}>
       <AddBookDialog
@@ -70,9 +78,8 @@ const BooksListOfReader: React.FC<Props> = (props) => {
         open={openDeleteDialog}
         title='זהירות!'
         message='האם אתה בטוח שברצונך למחוק?'
-        onCancel={() => setOpenDeleteDialog(false)}
         onClose={() => setOpenDeleteDialog(false)}
-        onConfirm={() => setOpenDeleteDialog(false)}
+        onConfirm={() => deleteBook(selectedBook as number)}
       />
       <Container>
         {readerData && isUser && (
@@ -110,7 +117,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
                   <CardActions sx={{ direction: 'rtl' }}>
                     <IconButton>
                       <DeleteIcon
-                        onClick={() => setOpenDeleteDialog(true)}
+                        onClick={() => deleteHandle(val.id)}
                         color='error'
                       />
                     </IconButton>

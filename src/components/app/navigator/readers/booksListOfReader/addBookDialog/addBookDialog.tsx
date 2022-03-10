@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSelector } from 'react-redux';
 
@@ -41,24 +41,19 @@ const AddBookDialog: React.FC<Props> = (props) => {
     handleClose: handleClose,
     addBookToUser: addBookToUser,
   });
-  const { error, loading, data } = useQuery(ALL_BOOKS_DONT_READ_OF_USER, {
+  const [allBooks] = useLazyQuery(ALL_BOOKS_DONT_READ_OF_USER, {
     fetchPolicy: 'network-only',
     nextFetchPolicy: 'network-only',
-    variables: { equalTo: loginUser?.id },
   });
 
   useEffect(() => {
-    if (data) {
-      setBooks(data.allBooks.nodes);
+    if (open) {
+      setSelectedBook(undefined);
+      allBooks({ variables: { equalTo: loginUser?.id } }).then((data) => {
+        setBooks(data.data.allBooks.nodes);
+      });
     }
-  }, [data]);
-
-  if (loading) {
-    return <CircularProgress />;
-  }
-  if (error) {
-    return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
-  }
+  }, [open, allBooks, loginUser]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedBook(parseInt(event.target.value));
