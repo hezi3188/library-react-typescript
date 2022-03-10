@@ -10,8 +10,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useLazyQuery } from '@apollo/client';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useSelector } from 'react-redux';
+import Typography from '@mui/material/Typography';
 
 import { RootState } from '../../../../../../redux/store';
 import Reader from '../../../../../../models/reader';
@@ -19,6 +19,11 @@ import { useStyles } from './addBookDialogStyles';
 import Book from '../../../../../../models/book';
 import { ALL_BOOKS_DONT_READ_OF_USER } from '../../../../../../GraphQL/Queries';
 import useAddBookDialog from './useAddBookDialog';
+
+const NO_BOOKS = 'משתמש זה כבר השאיל את כל הספרים הקיימים בספריה!';
+const ADD_BOOK_TITLE = 'הוסף ספר';
+const ADD_BOOK_BUTTON = 'הוסף';
+const CHOOSE_BOOK = 'בחר ספר';
 
 interface Props {
   open: boolean;
@@ -61,36 +66,39 @@ const AddBookDialog: React.FC<Props> = (props) => {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>הוסף ספר</DialogTitle>
-      <DialogContent>
-        <FormControl className={classes.select}>
-          <InputLabel>בחר ספר</InputLabel>
-          <Select
-            value={selectedBook?.toString()}
-            label='בחר ספר'
-            onChange={handleChange}
-          >
-            {books.map((val: Book) => {
-              if (val !== undefined) {
-                return (
-                  <MenuItem key={val.id} value={val.id}>
-                    {val.name}
-                    {/* {val.firstName} {val.lastName} */}
-                  </MenuItem>
-                );
-              }
-            })}
-          </Select>
-        </FormControl>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          disabled={selectedBook === undefined}
-          onClick={() => addBook(selectedBook as number)}
-        >
-          הוסף
-        </Button>
-      </DialogActions>
+      {books.length === 0 ? (
+        <Typography align='center' variant='h6'>
+          {NO_BOOKS}
+        </Typography>
+      ) : (
+        <div>
+          <DialogTitle>{ADD_BOOK_TITLE}</DialogTitle>
+          <DialogContent>
+            <FormControl className={classes.select}>
+              <InputLabel>{CHOOSE_BOOK}</InputLabel>
+              <Select value={selectedBook?.toString()} onChange={handleChange}>
+                {books.map((val: Book) => {
+                  if (val !== undefined) {
+                    return (
+                      <MenuItem key={val.id} value={val.id}>
+                        {val.name}
+                      </MenuItem>
+                    );
+                  }
+                })}
+              </Select>
+            </FormControl>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              disabled={selectedBook === undefined}
+              onClick={() => addBook(selectedBook as number)}
+            >
+              {ADD_BOOK_BUTTON}
+            </Button>
+          </DialogActions>
+        </div>
+      )}
     </Dialog>
   );
 };
