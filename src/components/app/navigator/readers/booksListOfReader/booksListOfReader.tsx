@@ -20,6 +20,7 @@ import Container from '../../../../../comons/container/container';
 import CustomCard from '../../../../../comons/customCard/card';
 import useBooksListOfReader from './useBooksListOfReader';
 import AddBookDialog from './addBookDialog/addBookDialog';
+import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
 
 interface Props {
   readerData: Reader;
@@ -40,6 +41,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
 
   const [books, setBooks] = useState<Book[]>([]);
   const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
 
   const { selectFavorite } = useBooksListOfReader({ books: books });
 
@@ -63,6 +65,14 @@ const BooksListOfReader: React.FC<Props> = (props) => {
         open={openAddDialog}
         addBookToUser={(book: Book) => setBooks([...books, book])}
         onClose={() => setOpenAddDialog(false)}
+      />
+      <ConfirmDialog
+        open={openDeleteDialog}
+        title='זהירות!'
+        message='האם אתה בטוח שברצונך למחוק?'
+        onCancel={() => setOpenDeleteDialog(false)}
+        onClose={() => setOpenDeleteDialog(false)}
+        onConfirm={() => setOpenDeleteDialog(false)}
       />
       <Container>
         {readerData && isUser && (
@@ -99,7 +109,10 @@ const BooksListOfReader: React.FC<Props> = (props) => {
                 {isUser && (
                   <CardActions sx={{ direction: 'rtl' }}>
                     <IconButton>
-                      <DeleteIcon color='error' />
+                      <DeleteIcon
+                        onClick={() => setOpenDeleteDialog(true)}
+                        color='error'
+                      />
                     </IconButton>
                     {loginUser?.favoriteBook !== val.id ? (
                       <IconButton>
