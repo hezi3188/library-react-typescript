@@ -21,6 +21,9 @@ const useBooksListOfReader = (
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
   );
+  const favoriteBook = useSelector<RootState, Book>(
+    (state) => state.auth.favoriteBook
+  );
   const [deleteBookToUser] = useMutation(DELETE_BOOK_TO_USER);
 
   const selectFavoriteHandle = (favoriteId: number | undefined) => {
@@ -37,6 +40,9 @@ const useBooksListOfReader = (
     deleteBookToUser({
       variables: { readerId: loginUser?.id, bookId: id },
     }).then(() => {
+      if (favoriteBook?.id === id) {
+        dispatch(selectFavorite(undefined));
+      }
       setBooks(books.filter((book: Book) => book?.id !== id));
     });
   };
