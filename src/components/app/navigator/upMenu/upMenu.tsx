@@ -12,6 +12,7 @@ import { logOut } from '../../../../redux/auth';
 const LIBRARY_TITLE: string = 'הספריה';
 const HELLO_TITLE: string = ' שלום ';
 const FAVORITE_TITLE: string = 'הספר המועדף עליך: ';
+const NO_FAVORITE: string = 'אין לך ספר מועדף';
 const LOG_OUT_BUTTON: string = 'התנתק';
 const DELETE_BUTTON: string = 'מחק חשבון';
 
@@ -37,9 +38,15 @@ const Menu: React.FC = () => {
           <Typography align='center' variant='h5'>
             {HELLO_TITLE} {loginUser?.firstName} {loginUser?.lastName}
           </Typography>
-          <Typography align='center' variant='h6'>
-            {FAVORITE_TITLE} {favoriteBook?.name}
-          </Typography>
+          {favoriteBook?.name !== undefined ? (
+            <Typography align='center' variant='h6'>
+              {FAVORITE_TITLE} {favoriteBook?.name}
+            </Typography>
+          ) : (
+            <Typography align='center' variant='h6'>
+              {NO_FAVORITE}
+            </Typography>
+          )}
         </div>
         <div>
           <Button
