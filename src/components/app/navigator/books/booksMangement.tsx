@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import Book from '../../../../models/book';
 import { LOAD_BOOKS } from '../../../../GraphQL/Queries';
+import { ERROR_DB } from '../../../../utils/strings';
 
 const BooksMangement: React.FC = () => {
   const { error, loading, data } = useQuery(LOAD_BOOKS);
@@ -17,7 +18,7 @@ const BooksMangement: React.FC = () => {
     return <CircularProgress />;
   }
   if (error) {
-    return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
+    return <h1>{ERROR_DB}</h1>;
   }
   return (
     <div>

@@ -76,7 +76,11 @@ const AddBookDialog: React.FC<Props> = (props) => {
           <DialogContent>
             <FormControl className={classes.select}>
               <InputLabel>{CHOOSE_BOOK}</InputLabel>
-              <Select value={selectedBook?.toString()} onChange={handleChange}>
+              <Select
+                label={CHOOSE_BOOK}
+                value={selectedBook?.toString()}
+                onChange={handleChange}
+              >
                 {books.map((val: Book) => {
                   if (val !== undefined) {
                     return (

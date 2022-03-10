@@ -13,7 +13,7 @@ import { LOAD_READERS } from '../../../GraphQL/Queries';
 import Reader from '../../../models/reader';
 import { useStyles } from './loginStyles';
 import useLogin from './useLogin';
-import {ERROR_DB} from '../../../utils/strings'
+import { ERROR_DB } from '../../../utils/strings';
 
 const LIBRARY_TITLE: string = 'הספריה';
 const CHOOSE_READER: string = 'בחר משתמש להתחברות';
@@ -59,7 +59,11 @@ const Login: React.FC = () => {
 
       <FormControl className={classes.select}>
         <InputLabel>{CHOOSE_READER}</InputLabel>
-        <Select value={selectedReader?.toString()} onChange={handleChange}>
+        <Select
+          label={CHOOSE_READER}
+          value={selectedReader?.toString()}
+          onChange={handleChange}
+        >
           {readers.map((val: Reader) => {
             if (val !== undefined) {
               return (

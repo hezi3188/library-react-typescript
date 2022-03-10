@@ -21,7 +21,10 @@ import CustomCard from '../../../../../comons/customCard/card';
 import useBooksListOfReader from './useBooksListOfReader';
 import AddBookDialog from './addBookDialog/addBookDialog';
 import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
+import { ERROR_DB } from '../../../../../utils/strings';
 
+const DELETE_DIALOG_TITLE = 'זהירות!';
+const DELETE_DIALOG_MESSAGE = 'האם אתה בטוח שברצונך למחוק?';
 interface Props {
   readerData: Reader;
 }
@@ -59,7 +62,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     return <CircularProgress />;
   }
   if (error && readerData !== undefined) {
-    return <h1>התרחשה שגיאה בבקשה נסה מאוחר יותר</h1>;
+    return <h1>{ERROR_DB}</h1>;
   }
   let isUser: boolean = readerData?.id === loginUser?.id;
 
@@ -76,8 +79,8 @@ const BooksListOfReader: React.FC<Props> = (props) => {
       />
       <ConfirmDialog
         open={openDeleteDialog}
-        title='זהירות!'
-        message='האם אתה בטוח שברצונך למחוק?'
+        title={DELETE_DIALOG_TITLE}
+        message={DELETE_DIALOG_MESSAGE}
         onClose={() => setOpenDeleteDialog(false)}
         onConfirm={() => deleteBook(selectedBook as number)}
       />
