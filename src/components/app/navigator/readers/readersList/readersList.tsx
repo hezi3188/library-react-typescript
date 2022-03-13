@@ -9,9 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import AddBookDialog from './addBookDialog/addBookDialog';
+import EditReaderDialog from './editReaderDialog/editReaderDialog';
 import Reader from '../../../../../models/reader';
-import Book from '../../../../../models/book';
 import { LOAD_READERS } from '../../../../../GraphQL/Queries';
 import { RootState } from '../../../../../redux/store';
 import { useStyles } from './readersListStyles';
@@ -35,7 +34,7 @@ const ReadersList: React.FC<Props> = (props) => {
 
   const [openEditDialog, setEditAddDialog] = useState<boolean>(false);
 
-  const handleEdit = (r:Reader) => {
+  const handleEdit = (r: Reader) => {
     setEditAddDialog(true);
     setSelectedReader(r);
   };
@@ -54,10 +53,9 @@ const ReadersList: React.FC<Props> = (props) => {
   }
   return (
     <div className={classes.root}>
-      <AddBookDialog
+      <EditReaderDialog
         reader={selectedReader}
         open={openEditDialog}
-        addBookToUser={(book: Book) => {}}
         onClose={() => setEditAddDialog(false)}
       />
       <Container>
@@ -80,7 +78,7 @@ const ReadersList: React.FC<Props> = (props) => {
                     </IconButton>
                   )}
                   <IconButton>
-                    <EditIcon onClick={()=>handleEdit(val)} />
+                    <EditIcon onClick={() => handleEdit(val)} />
                   </IconButton>
                 </CardActions>
               </CustomCard>
