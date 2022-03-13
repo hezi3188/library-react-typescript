@@ -2,10 +2,10 @@ import { useMutation } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { DELETE_BOOK_TO_USER } from '../../../../../GraphQL/Queries';
-import { SELECT_FAVORITE_BOOK } from '../../../../../GraphQL/Queries';
+import { EDIT_READER } from '../../../../../GraphQL/Queries';
 import { RootState } from '../../../../../redux/store';
 import Reader from '../../../../../models/reader';
-import { selectFavorite } from '../../../../../redux/auth';
+import { editReader } from '../../../../../redux/auth';
 import Book from '../../../../../models/book';
 import {
   UseBooksListOfReaderOutput,
@@ -17,22 +17,21 @@ const useBooksListOfReader = (
 ): UseBooksListOfReaderOutput => {
   const { books, setBooks } = props;
   const dispatch = useDispatch();
-  const [selectFavoriteDb] = useMutation(SELECT_FAVORITE_BOOK);
+  const [selectFavoriteDb] = useMutation(EDIT_READER);
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
   );
-  const favoriteBook = useSelector<RootState, Book>(
-    (state) => state.auth.favoriteBook
-  );
+
   const [deleteBookToUser] = useMutation(DELETE_BOOK_TO_USER);
 
-  const selectFavoriteHandle = (favoriteId: number | undefined) => {
+  const selectFavoriteHandle = (favoriteBook: Book | undefined) => {
     selectFavoriteDb({
-      variables: { favoriteBook: favoriteId, id: loginUser?.id },
-    }).then(() => {
-      dispatch(
-        selectFavorite(books.filter((book: Book) => book?.id === favoriteId)[0])
-      );
+      variables: {
+        favoriteBook: favoriteBook ? favoriteBook.id : null,
+        id: loginUser?.id,
+      },
+    }).then((data) => {
+      dispatch(editReader(data.data.updateReaderById.reader));
     });
   };
 
@@ -40,8 +39,14 @@ const useBooksListOfReader = (
     deleteBookToUser({
       variables: { readerId: loginUser?.id, bookId: id },
     }).then(() => {
-      if (favoriteBook?.id === id) {
-        dispatch(selectFavorite(undefined));
+      if (loginUser?.favoriteBook?.id === id) {
+        let copyState: Reader = {
+          id: loginUser?.id,
+          lastName: loginUser?.lastName,
+          firstName: loginUser?.firstName,
+          favoriteBook: undefined,
+        };
+        dispatch(editReader(copyState));
       }
       setBooks(books.filter((book: Book) => book?.id !== id));
     });

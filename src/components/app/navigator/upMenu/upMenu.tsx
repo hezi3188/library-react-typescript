@@ -1,12 +1,10 @@
 import { Button, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useStyles } from './upMenuStyles';
 import { RootState } from '../../../../redux/store';
 import Reader from '../../../../models/reader';
-import Book from '../../../../models/book';
-import { useDispatch } from 'react-redux';
 import { logOut } from '../../../../redux/auth';
 import ConfirmDialog from '../../../../comons/confirmDialog/confirmDialog';
 
@@ -25,9 +23,6 @@ const Menu: React.FC = () => {
   const [logoutDialogOpen, setLogoutDialogOpen] = useState<boolean>(false);
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
-  );
-  const favoriteBook = useSelector<RootState, Book>(
-    (state) => state.auth.favoriteBook
   );
 
   return (
@@ -49,13 +44,14 @@ const Menu: React.FC = () => {
           <Typography align='center' variant='h5'>
             {HELLO_TITLE} {loginUser?.firstName} {loginUser?.lastName}
           </Typography>
-          {favoriteBook?.name !== undefined ? (
+          {loginUser?.favoriteBook?.name !== undefined ? (
             <Typography align='center' variant='h6'>
-              {FAVORITE_TITLE} {favoriteBook?.name}
+              {FAVORITE_TITLE} {loginUser?.favoriteBook?.name}
             </Typography>
           ) : (
             <Typography align='center' variant='h6'>
               {NO_FAVORITE}
+              {loginUser?.favoriteBook?.name}
             </Typography>
           )}
         </div>

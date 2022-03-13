@@ -7,7 +7,15 @@ export const LOAD_READERS = gql`
         lastName
         id
         firstName
-        favoriteBook
+        favoriteBook: bookByFavoriteBook {
+          name
+          id
+          author: authorByAuthorId {
+            firstName
+            lastName
+            id
+          }
+        }
       }
     }
   }
@@ -51,6 +59,11 @@ export const GET_BOOKS_OF_USER = gql`
         bookByBookId {
           name
           id
+          author: authorByAuthorId {
+            firstName
+            lastName
+            id
+          }
         }
       }
     }
@@ -69,15 +82,51 @@ export const SELECT_FAVORITE_BOOK = gql`
     }
   }
 `;
+export const EDIT_READER = gql`
+  mutation selectFavoriteDb(
+    $id: Int!
+    $firstName: String
+    $lastName: String
+    $favoriteBook: Int 
+  ) {
+    updateReaderById(
+      input: {
+        readerPatch: {
+          favoriteBook: $favoriteBook
+          firstName: $firstName
+          lastName: $lastName
+        }
+        id: $id
+      }
+    ) {
+      reader {
+        id
+        lastName
+        firstName
+        favoriteBook: bookByFavoriteBook {
+          name
+          id
+          author: authorByAuthorId {
+            firstName
+            lastName
+            id
+          }
+        }
+      }
+    }
+  }
+`;
 export const ADD_BOOK_TO_USER = gql`
   mutation MyMutation($bookId: Int!, $readerId: Int!) {
     createBooksList(
       input: { booksList: { readerId: $readerId, bookId: $bookId } }
     ) {
       bookByBookId {
-        id
         name
-        authorByAuthorId {
+        id
+        author: authorByAuthorId {
+          firstName
+          lastName
           id
         }
       }

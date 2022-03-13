@@ -5,6 +5,6 @@ export interface UseBooksListOfReaderInput {
   setBooks: (books: Book[]) => void;
 }
 export interface UseBooksListOfReaderOutput {
-  selectFavorite: (id: number | undefined) => void;
+  selectFavorite: (book: Book | undefined) => void;
   deleteBook: (id: number) => void;
 }

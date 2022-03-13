@@ -1,8 +1,10 @@
+import Book from './book';
+
 interface ReaderModel {
   lastName: string;
   id: number;
   firstName: string;
-  favoriteBook: number | undefined;
+  favoriteBook: Book;
 }
 
 type Reader = ReaderModel | undefined;

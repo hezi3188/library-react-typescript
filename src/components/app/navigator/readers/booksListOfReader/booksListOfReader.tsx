@@ -23,8 +23,8 @@ import AddBookDialog from './addBookDialog/addBookDialog';
 import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
 import { ERROR_DB } from '../../../../../utils/strings';
 
-const DELETE_DIALOG_TITLE = 'זהירות!';
-const DELETE_DIALOG_MESSAGE = 'האם אתה בטוח שברצונך למחוק?';
+const DELETE_DIALOG_TITLE: string = 'זהירות!';
+const DELETE_DIALOG_MESSAGE: string = 'האם אתה בטוח שברצונך למחוק?';
 interface Props {
   readerData: Reader;
 }
@@ -113,7 +113,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
                     מזהה: {val.id}
                   </Typography>
                   <Typography variant='body1' component='div'>
-                    שם: {val.name}
+                    שם: {val.name}. סופר: {val.author.firstName} {val.author.lastName}
                   </Typography>
                 </CardContent>
                 {isUser && (
@@ -124,10 +124,10 @@ const BooksListOfReader: React.FC<Props> = (props) => {
                         color='error'
                       />
                     </IconButton>
-                    {loginUser?.favoriteBook !== val.id ? (
+                    {loginUser?.favoriteBook?.id !== val.id ? (
                       <IconButton>
                         <StarBorderIcon
-                          onClick={() => selectFavorite(val.id)}
+                          onClick={() => selectFavorite(val)}
                         />
                       </IconButton>
                     ) : (
