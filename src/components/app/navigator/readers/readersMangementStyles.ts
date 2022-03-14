@@ -6,7 +6,7 @@ export const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: '4px',
-    height: '90%',
+    height: '100%',
     width: '98%',
   },
 });

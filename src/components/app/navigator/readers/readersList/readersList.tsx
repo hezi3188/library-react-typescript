@@ -1,25 +1,16 @@
 import { useQuery } from '@apollo/client';
-import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 
 import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
 import EditReaderDialog from './editReaderDialog/editReaderDialog';
 import Reader from '../../../../../models/reader';
 import { LOAD_READERS } from '../../../../../GraphQL/Queries';
-import { RootState } from '../../../../../redux/store';
 import { useStyles } from './readersListStyles';
 import Container from '../../../../../comons/container/container';
-import CustomCard from '../../../../../comons/customCard/card';
 import { ERROR_DB } from '../../../../../utils/strings';
 import useReadersList from './useReadersList';
-
+import ReaderCard from './card/card';
 const DELETE_DIALOG_TITLE: string = 'זהירות!';
 const DELETE_DIALOG_MESSAGE: string = 'האם אתה בטוח שברצונך למחוק?';
 
@@ -30,9 +21,6 @@ interface Props {
 const ReadersList: React.FC<Props> = (props) => {
   const classes = useStyles();
   const { getReaderData } = props;
-  const loginUser = useSelector<RootState, Reader>(
-    (state) => state.auth.loginUser
-  );
   const { error, loading, data } = useQuery(LOAD_READERS);
   const [readers, setReaders] = useState<Reader[]>([]);
   const [selectedReader, setSelectedReader] = useState<Reader>();
@@ -83,26 +71,12 @@ const ReadersList: React.FC<Props> = (props) => {
         {readers.map((val: Reader) => {
           if (val !== undefined) {
             return (
-              <CustomCard key={val.id}>
-                <CardContent onClick={() => getReaderData(val)}>
-                  <Typography variant='h5' component='div'>
-                    מזהה: {val.id}
-                  </Typography>
-                  <Typography variant='body1' component='div'>
-                    שם: {val.firstName} {val.lastName}
-                  </Typography>
-                </CardContent>
-                <CardActions sx={{ direction: 'rtl' }}>
-                  {val.id !== loginUser?.id && (
-                    <IconButton onClick={() => handleDelete(val)}>
-                      <DeleteIcon color='error' />
-                    </IconButton>
-                  )}
-                  <IconButton onClick={() => handleEdit(val)}>
-                    <EditIcon />
-                  </IconButton>
-                </CardActions>
-              </CustomCard>
+              <ReaderCard
+                reader={val}
+                deleteHandle={() => handleDelete(val)}
+                onClick={() => getReaderData(val)}
+                editHandle={() => handleEdit(val)}
+              />
             );
           }
         })}
