@@ -19,6 +19,9 @@ import BookCard from './card/card';
 
 const DELETE_DIALOG_TITLE: string = 'זהירות!';
 const DELETE_DIALOG_MESSAGE: string = 'האם אתה בטוח שברצונך למחוק?';
+const ADD_BOOK_TITLE: string = 'הוסף ספר';
+const BOOKS_OF_TITLE: string = ' הספרים של';
+
 interface Props {
   readerData: Reader;
 }
@@ -102,7 +105,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
         {readerData && isUser && (
           <div className={classes.upContainer}>
             <Typography variant='h6'>
-              הספרים של{' '}
+              {BOOKS_OF_TITLE}{' '}
               <strong>
                 {' '}
                 {readerData.firstName} {readerData.lastName}
@@ -114,7 +117,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
               color='success'
               variant='contained'
             >
-              הוסף ספר
+              {ADD_BOOK_TITLE}
             </Button>
           </div>
         )}
