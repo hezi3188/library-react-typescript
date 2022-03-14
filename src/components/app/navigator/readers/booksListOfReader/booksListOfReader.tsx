@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
-import { Button } from '@mui/material';
+import { Alert, Button, Snackbar } from '@mui/material';
 
 import Book from '../../../../../models/book';
 import Reader from '../../../../../models/reader';
@@ -45,11 +45,15 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
+  const [openMessage, setOpenMessage] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
   const [selectedBook, setSelectedBook] = useState<number>();
 
-  const { selectFavorite, deleteBook } = useBooksListOfReader({
+  const { selectFavorite, deleteBook, addBookToUser } = useBooksListOfReader({
     books: books,
     setBooks: setBooks,
+    setOpenMessage: setOpenMessage,
+    setMessage: setMessage,
   });
 
   useEffect(() => {
@@ -74,9 +78,24 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     <div className={classes.root}>
       <AddBookDialog
         open={openAddDialog}
-        addBookToUser={(book: Book) => setBooks([...books, book])}
+        addBookToUser={(book: Book) => {
+          addBookToUser(book);
+        }}
         onClose={() => setOpenAddDialog(false)}
       />
+      <Snackbar
+        open={openMessage}
+        autoHideDuration={6000}
+        onClose={() => setOpenMessage(false)}
+      >
+        <Alert
+          onClose={() => setOpenMessage(false)}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
       <ConfirmDialog
         open={openDeleteDialog}
         title={DELETE_DIALOG_TITLE}
@@ -107,13 +126,14 @@ const BooksListOfReader: React.FC<Props> = (props) => {
         {books.map((val: Book) => {
           if (val !== undefined) {
             return (
-              <CustomCard>
+              <CustomCard key={val.id}>
                 <CardContent>
                   <Typography variant='h5' component='div'>
                     מזהה: {val.id}
                   </Typography>
                   <Typography variant='body1' component='div'>
-                    שם: {val.name}. סופר: {val.author.firstName} {val.author.lastName}
+                    שם: {val.name}. סופר: {val.author.firstName}{' '}
+                    {val.author.lastName}
                   </Typography>
                 </CardContent>
                 {isUser && (
@@ -126,9 +146,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
                     </IconButton>
                     {loginUser?.favoriteBook?.id !== val.id ? (
                       <IconButton>
-                        <StarBorderIcon
-                          onClick={() => selectFavorite(val)}
-                        />
+                        <StarBorderIcon onClick={() => selectFavorite(val)} />
                       </IconButton>
                     ) : (
                       <IconButton onClick={() => selectFavorite(undefined)}>

@@ -87,7 +87,7 @@ export const EDIT_READER = gql`
     $id: Int!
     $firstName: String
     $lastName: String
-    $favoriteBook: Int 
+    $favoriteBook: Int
   ) {
     updateReaderById(
       input: {
@@ -157,6 +157,15 @@ export const ALL_BOOKS_DONT_READ_OF_USER = gql`
         name
         id
         authorId
+      }
+    }
+  }
+`;
+export const DELETE_READER = gql`
+  mutation MyMutation($id: Int!) {
+    deleteReaderById(input: { id: $id }) {
+      reader {
+        id
       }
     }
   }

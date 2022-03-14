@@ -1,12 +1,12 @@
 import { Button, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useStyles } from './upMenuStyles';
 import { RootState } from '../../../../redux/store';
 import Reader from '../../../../models/reader';
-import { logOut } from '../../../../redux/auth';
 import ConfirmDialog from '../../../../comons/confirmDialog/confirmDialog';
+import useUpMenu from './useUpMenu';
 
 const LIBRARY_TITLE: string = 'הספריה';
 const HELLO_TITLE: string = ' שלום ';
@@ -16,11 +16,16 @@ const LOG_OUT_BUTTON: string = 'התנתק';
 const DELETE_BUTTON: string = 'מחק חשבון';
 const LOGOUT_DIALOG_TITLE: string = 'זהירות!';
 const LOGOUT_DIALOG_MESSAGE: string = 'האם אתה בטוח שאתה רוצה להתנתק?';
+const DEL_ACCOUNT_DIALOG_TITLE: string = 'זהירות!';
+const DEL_ACCOUNT_DIALOG_MESSAGE: string =
+  'האם אתה בטוח שאתה רוצה למחוק את החשבון?';
 
 const Menu: React.FC = () => {
-  const dispatch = useDispatch();
+  const { deleteAccount, logout } = useUpMenu({});
   const classes = useStyles();
   const [logoutDialogOpen, setLogoutDialogOpen] = useState<boolean>(false);
+  const [delAccountDialogOpen, setDelAccountDialogOpen] =
+    useState<boolean>(false);
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
   );
@@ -32,7 +37,14 @@ const Menu: React.FC = () => {
         title={LOGOUT_DIALOG_TITLE}
         message={LOGOUT_DIALOG_MESSAGE}
         onClose={() => setLogoutDialogOpen(false)}
-        onConfirm={() => dispatch(logOut())}
+        onConfirm={() => logout()}
+      />
+      <ConfirmDialog
+        open={delAccountDialogOpen}
+        title={DEL_ACCOUNT_DIALOG_TITLE}
+        message={DEL_ACCOUNT_DIALOG_MESSAGE}
+        onClose={() => setDelAccountDialogOpen(false)}
+        onConfirm={() => deleteAccount()}
       />
       <div>
         <Typography className={classes.title} align='center' variant='h2'>
@@ -66,7 +78,12 @@ const Menu: React.FC = () => {
           </Button>
         </div>
         <div>
-          <Button size='large' color='error' variant='contained'>
+          <Button
+            onClick={() => setDelAccountDialogOpen(true)}
+            size='large'
+            color='error'
+            variant='contained'
+          >
             {DELETE_BUTTON}
           </Button>
         </div>

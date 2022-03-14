@@ -15,7 +15,7 @@ import {
 const useBooksListOfReader = (
   props: UseBooksListOfReaderInput
 ): UseBooksListOfReaderOutput => {
-  const { books, setBooks } = props;
+  const { books, setBooks, setOpenMessage, setMessage } = props;
   const dispatch = useDispatch();
   const [selectFavoriteDb] = useMutation(EDIT_READER);
   const loginUser = useSelector<RootState, Reader>(
@@ -52,9 +52,23 @@ const useBooksListOfReader = (
     });
   };
 
+  const addBookToUser = (book: Book) => {
+    setOpenMessage(true);
+    setBooks([...books, book]);
+    setMessage(
+      'הספר ' +
+        book?.name +
+        ' נוסף בהצלחה ל' +
+        loginUser?.firstName +
+        ' ' +
+        loginUser?.lastName
+    );
+  };
+
   return {
     selectFavorite: selectFavoriteHandle,
     deleteBook: deleteBook,
+    addBookToUser: addBookToUser,
   };
 };
 export default useBooksListOfReader;
