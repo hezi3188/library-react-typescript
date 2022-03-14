@@ -3,7 +3,7 @@ import { useStyles } from './containerStyles';
 interface Props  {
   children: React.ReactNode
 }
-const ReadersMangement: React.FC<Props> = (props) => {
+const Container: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   return (
@@ -13,4 +13,4 @@ const ReadersMangement: React.FC<Props> = (props) => {
   );
 };
 
-export default ReadersMangement;
+export default Container;

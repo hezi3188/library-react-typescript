@@ -16,6 +16,7 @@ import CustomCard from '../../../../../../comons/customCard/card';
 const NAME: string = 'שם: ';
 const ID: string = 'מזהה';
 const AUTHOR: string = 'סופר: ';
+
 interface Props {
   book: Book;
   selectFavorite: (book: Book) => void;

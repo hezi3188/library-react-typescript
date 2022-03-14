@@ -16,6 +16,7 @@ import AddBookDialog from './addBookDialog/addBookDialog';
 import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
 import { ERROR_DB } from '../../../../../utils/strings';
 import BookCard from './card/card';
+
 const DELETE_DIALOG_TITLE: string = 'זהירות!';
 const DELETE_DIALOG_MESSAGE: string = 'האם אתה בטוח שברצונך למחוק?';
 interface Props {

@@ -12,6 +12,9 @@ import {
   UseBooksListOfReaderInput,
 } from './UseBooksListOfReaderInterfaces';
 
+const BOOK_TITLE = 'הספר ';
+const ADD_BOOK_TITLE = 'נוסף בהצלחה ל';
+
 const useBooksListOfReader = (
   props: UseBooksListOfReaderInput
 ): UseBooksListOfReaderOutput => {
@@ -56,9 +59,10 @@ const useBooksListOfReader = (
     setOpenMessage(true);
     setBooks([...books, book]);
     setMessage(
-      'הספר ' +
+      BOOK_TITLE +
         book?.name +
-        ' נוסף בהצלחה ל' +
+        ' ' +
+        ADD_BOOK_TITLE +
         loginUser?.firstName +
         ' ' +
         loginUser?.lastName

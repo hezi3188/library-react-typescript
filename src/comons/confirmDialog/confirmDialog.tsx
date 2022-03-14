@@ -14,7 +14,7 @@ interface Props {
   onCancel?: () => void;
 }
 
-const AddBookDialog: React.FC<Props> = (props) => {
+const ConfirmDialog: React.FC<Props> = (props) => {
   const { open, onClose, onConfirm, onCancel, title, message } = props;
 
   const handleOnConfirm = () => {
@@ -41,4 +41,4 @@ const AddBookDialog: React.FC<Props> = (props) => {
   );
 };
 
-export default AddBookDialog;
+export default ConfirmDialog;
