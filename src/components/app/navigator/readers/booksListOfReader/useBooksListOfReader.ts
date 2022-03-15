@@ -44,9 +44,7 @@ const useBooksListOfReader = (
     }).then(() => {
       if (loginUser?.favoriteBook?.id === id) {
         let copyState: Reader = {
-          id: loginUser?.id,
-          lastName: loginUser?.lastName,
-          firstName: loginUser?.firstName,
+          ...loginUser,
           favoriteBook: undefined,
         };
         dispatch(editReader(copyState));

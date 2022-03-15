@@ -7,7 +7,7 @@ const useAddTodo = (props: UseLoginInput): UseLoginOutput => {
   const { readers } = props;
   const dispatch = useDispatch();
   const getUser = (selectedReader: number) =>
-    readers.filter((item) => item?.id === selectedReader)[0];
+    readers.find((item) => item?.id === selectedReader)!;
 
   const loginUser = (selectedReader: number) => {
     dispatch(login(getUser(selectedReader)));

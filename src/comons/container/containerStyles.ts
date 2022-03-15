@@ -6,8 +6,8 @@ export const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: '4px',
-    height: '90%',
-    width: '98%',
+    height: '80vh',
+    width: '45vw',
   },
   container: {
     overflowY: 'auto',

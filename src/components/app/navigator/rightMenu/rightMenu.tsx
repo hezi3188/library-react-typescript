@@ -11,7 +11,10 @@ const BOOKS_MANGE_TITLE: string = 'ניהול ספרים';
 const Menu: React.FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-
+  const menuItem ={
+    navigate: '/',
+    text: USER_MANGE_TITLE,
+  }
   return (
     <div className={classes.root}>
       <Button

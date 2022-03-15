@@ -23,8 +23,8 @@ const Login: React.FC = () => {
   const classes = useStyles();
   const { error, loading, data } = useQuery(LOAD_READERS, {
     fetchPolicy: 'network-only',
-    nextFetchPolicy: 'network-only',
   });
+
   const [readers, setReaders] = useState<Reader[]>([]);
   const [selectedReader, setSelectedReader] = useState<number>();
   const { loginUser } = useLogin({
@@ -77,9 +77,9 @@ const Login: React.FC = () => {
       </FormControl>
       <div className={classes.loginBtn}>
         <Button
-          disabled={selectedReader === undefined}
+          disabled={!selectedReader}
           onClick={() => {
-            if (selectedReader !== undefined) {
+            if (selectedReader) {
               loginUser(selectedReader);
             }
           }}

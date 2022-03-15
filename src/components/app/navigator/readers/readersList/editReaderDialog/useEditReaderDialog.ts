@@ -31,7 +31,7 @@ const useAddBookDialog = (
         firstName: firstName,
         lastName: lastName,
       },
-    }).then((obj) => {
+    }).then(() => {
       handleClose();
       if (loginUser?.id === readerId) {
         let copyState: Reader = {

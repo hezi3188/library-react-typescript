@@ -35,7 +35,6 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   );
   const { loading, error, data } = useQuery(GET_BOOKS_OF_USER, {
     fetchPolicy: 'network-only',
-    nextFetchPolicy: 'network-only',
     variables: { equalTo: readerData?.id },
   });
 
@@ -66,12 +65,13 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     return <h1>{ERROR_DB}</h1>;
   }
 
-  let isUser: boolean = readerData?.id === loginUser?.id;
+  const isUser: boolean = readerData?.id === loginUser?.id;
 
   const deleteHandle = (id: number) => {
     setOpenDeleteDialog(true);
     setSelectedBook(id);
   };
+
   return (
     <div className={classes.root}>
       <AddBookDialog
@@ -83,7 +83,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
       />
       <Snackbar
         open={openMessage}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={() => setOpenMessage(false)}
       >
         <Alert

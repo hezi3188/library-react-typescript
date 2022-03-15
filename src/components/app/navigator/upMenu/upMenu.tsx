@@ -47,30 +47,31 @@ const Menu: React.FC = () => {
         onConfirm={() => deleteAccount()}
       />
       <div>
-        <Typography className={classes.title} align='center' variant='h2'>
+        <Typography
+          sx={{ fontSize: '4vw' }}
+          className={classes.title}
+          align='center'
+          variant='h2'
+        >
           {LIBRARY_TITLE}
         </Typography>
       </div>
       <div className={classes.upMenuLeft}>
         <div className={classes.loginOutput}>
-          <Typography align='center' variant='h5'>
+          <Typography sx={{ fontSize: '4vh' }} align='center' variant='h5'>
             {HELLO_TITLE} {loginUser?.firstName} {loginUser?.lastName}
           </Typography>
-          {loginUser?.favoriteBook?.name !== undefined ? (
-            <Typography align='center' variant='h6'>
-              {FAVORITE_TITLE} {loginUser?.favoriteBook?.name}
-            </Typography>
-          ) : (
-            <Typography align='center' variant='h6'>
-              {NO_FAVORITE}
-              {loginUser?.favoriteBook?.name}
-            </Typography>
-          )}
+          <Typography align='center' variant='h6' sx={{ fontSize: '2.7vh' }}>
+            {loginUser?.favoriteBook?.name
+              ? `${FAVORITE_TITLE} ${loginUser.favoriteBook.name}`
+              : NO_FAVORITE}
+          </Typography>
         </div>
         <div>
           <Button
-            style={{ backgroundColor: 'yellow' }}
+            className={classes.logoutButton}
             size='large'
+            sx={{ fontSize: '2vh' }}
             variant='contained'
             onClick={() => setLogoutDialogOpen(true)}
           >
@@ -79,6 +80,8 @@ const Menu: React.FC = () => {
         </div>
         <div>
           <Button
+            className={classes.deleteButton}
+            sx={{ fontSize: '2vh' }}
             onClick={() => setDelAccountDialogOpen(true)}
             size='large'
             color='error'

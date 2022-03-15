@@ -38,45 +38,43 @@ const AddBookDialog: React.FC<Props> = (props) => {
   useEffect(() => {
     setFirstName(reader?.firstName);
     setLastName(reader?.lastName);
-  }, [reader]);
+  }, [reader, onClose]);
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <div>
-        <DialogTitle>{EDIT_READER_TITLE}</DialogTitle>
-        <DialogContent>
-          <FormControl className={classes.select}>
-            <TextField
-              label={FIRST_NAME}
-              variant='outlined'
-              required
-              defaultValue={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <TextField
-              required
-              label={LAST_NAME}
-              variant='outlined'
-              defaultValue={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </FormControl>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            disabled={firstName === '' || lastName === ''}
-            onClick={() =>
-              addBook(
-                firstName as string,
-                lastName as string,
-                reader?.id as number
-              )
-            }
-          >
-            {EDIT_READER_BUTTON}
-          </Button>
-        </DialogActions>
-      </div>
+      <DialogTitle>{EDIT_READER_TITLE}</DialogTitle>
+      <DialogContent>
+        <FormControl className={classes.select}>
+          <TextField
+            label={FIRST_NAME}
+            variant='outlined'
+            required
+            defaultValue={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <TextField
+            required
+            label={LAST_NAME}
+            variant='outlined'
+            defaultValue={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </FormControl>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          disabled={firstName === '' || lastName === ''}
+          onClick={() =>
+            addBook(
+              firstName as string,
+              lastName as string,
+              reader?.id as number
+            )
+          }
+        >
+          {EDIT_READER_BUTTON}
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };

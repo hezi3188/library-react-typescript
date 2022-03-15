@@ -17,10 +17,21 @@ export const useStyles = makeStyles({
     '& *': {
       margin: '4px',
     },
+    // width: '15vw',
+    height: '8vh',
   },
   loginOutput: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
+  },
+  deleteButton: {
+    width: '10vw',
+    height: '6vh',
+  },
+  logoutButton: {
+    backgroundColor: 'yellow!important',
+    width: '5vw',
+    height: '6vh',
   },
 });

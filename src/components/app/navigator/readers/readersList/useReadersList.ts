@@ -17,7 +17,7 @@ const useBooksListOfReader = (
   const handleDeleteReader = (id: number) => {
     deleteReader({
       variables: {
-        id: id,
+        id,
       },
     }).then(() => {
       setReaders(readers.filter((item: Reader) => item?.id !== id));

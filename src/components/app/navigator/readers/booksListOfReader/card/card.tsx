@@ -56,7 +56,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
             </IconButton>
           ) : (
             <IconButton onClick={() => selectFavorite(undefined)}>
-              <StarIcon color='success' />
+              <StarIcon sx={{ color: 'yellow' }} />
             </IconButton>
           )}
         </CardActions>

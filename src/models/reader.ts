@@ -4,7 +4,7 @@ interface ReaderModel {
   lastName: string;
   id: number;
   firstName: string;
-  favoriteBook: Book;
+  favoriteBook?: Book;
 }
 
 type Reader = ReaderModel | undefined;

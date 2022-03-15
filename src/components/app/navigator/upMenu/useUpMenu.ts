@@ -24,8 +24,8 @@ const useAddTodo = (props: UseLoginInput): UseLoginOutput => {
   };
 
   return {
-    deleteAccount: deleteAccount,
-    logout: logout,
+    deleteAccount,
+    logout
   };
 };
 export default useAddTodo;
