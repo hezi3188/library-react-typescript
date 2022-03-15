@@ -63,7 +63,7 @@ const AddBookDialog: React.FC<Props> = (props) => {
       </DialogContent>
       <DialogActions>
         <Button
-          disabled={firstName === '' || lastName === ''}
+          disabled={!firstName || !lastName}
           onClick={() =>
             addBook(
               firstName as string,

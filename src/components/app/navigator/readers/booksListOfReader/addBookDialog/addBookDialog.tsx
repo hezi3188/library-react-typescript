@@ -82,7 +82,7 @@ const AddBookDialog: React.FC<Props> = (props) => {
                 onChange={handleChange}
               >
                 {books.map((val: Book) => {
-                  if (val !== undefined) {
+                  if (val) {
                     return (
                       <MenuItem key={val.id} value={val.id}>
                         {val.name}
@@ -95,7 +95,7 @@ const AddBookDialog: React.FC<Props> = (props) => {
           </DialogContent>
           <DialogActions>
             <Button
-              disabled={selectedBook === undefined}
+              disabled={!selectedBook}
               onClick={() => addBook(selectedBook as number)}
             >
               {ADD_BOOK_BUTTON}

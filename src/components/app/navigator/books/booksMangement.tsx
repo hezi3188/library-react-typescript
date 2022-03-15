@@ -24,7 +24,7 @@ const BooksMangement: React.FC = () => {
     <div>
       ff
       {books.map((val: Book) => {
-        if (val !== undefined) {
+        if (val) {
           return <h1> {val.name}</h1>;
         }
       })}

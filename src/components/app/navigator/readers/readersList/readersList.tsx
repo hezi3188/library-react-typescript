@@ -70,7 +70,7 @@ const ReadersList: React.FC<Props> = (props) => {
       />
       <Container>
         {readers.map((val: Reader) => {
-          if (val !== undefined) {
+          if (val) {
             return (
               <ReaderCard
                 reader={val}

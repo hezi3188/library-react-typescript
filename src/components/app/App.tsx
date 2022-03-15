@@ -41,7 +41,7 @@ const App: React.FC = () => {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client}>
-          {auth === undefined ? <Login /> : <Navigator />}
+          {auth ? <Navigator /> : <Login />}
         </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>

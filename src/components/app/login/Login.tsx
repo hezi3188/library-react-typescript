@@ -65,7 +65,7 @@ const Login: React.FC = () => {
           onChange={handleChange}
         >
           {readers.map((val: Reader) => {
-            if (val !== undefined) {
+            if (val) {
               return (
                 <MenuItem key={val.id} value={val.id}>
                   {val.firstName} {val.lastName}

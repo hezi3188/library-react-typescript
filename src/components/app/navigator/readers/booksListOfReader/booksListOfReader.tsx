@@ -61,7 +61,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   if (loading) {
     return <CircularProgress />;
   }
-  if (error && readerData !== undefined) {
+  if (error && readerData) {
     return <h1>{ERROR_DB}</h1>;
   }
 
@@ -122,7 +122,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
           </div>
         )}
         {books.map((val: Book) => {
-          if (val !== undefined) {
+          if (val) {
             return (
               <BookCard
                 book={val}
