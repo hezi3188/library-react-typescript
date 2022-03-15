@@ -4,5 +4,5 @@ export interface UseLoginInput {
   readers: Reader[];
 }
 export interface UseLoginOutput {
-  loginUser: (selectedReader: number) => void;
+  loginUser: (id: number) => void;
 }

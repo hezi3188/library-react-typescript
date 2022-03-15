@@ -6,11 +6,11 @@ import { login } from '../../../redux/auth';
 const useAddTodo = (props: UseLoginInput): UseLoginOutput => {
   const { readers } = props;
   const dispatch = useDispatch();
-  const getUser = (selectedReader: number) =>
-    readers.find((item) => item?.id === selectedReader)!;
+  const getUser = (id: number) =>
+    readers.find((item) => item?.id === id)!;
 
-  const loginUser = (selectedReader: number) => {
-    dispatch(login(getUser(selectedReader)));
+  const loginUser = (id: number) => {
+    dispatch(login(getUser(id)));
   };
 
   return {

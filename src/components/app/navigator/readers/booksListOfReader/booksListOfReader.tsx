@@ -84,6 +84,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
       <Snackbar
         open={openMessage}
         autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         onClose={() => setOpenMessage(false)}
       >
         <Alert
