@@ -17,8 +17,8 @@ const ID: string = 'מזהה';
 interface Props {
   onClick: () => void;
   reader: Reader;
-  deleteHandle: (r: Reader) => void;
-  editHandle: (r: Reader) => void;
+  deleteHandle: (reader: Reader) => void;
+  editHandle: (reader: Reader) => void;
 }
 
 const BooksListOfReader: React.FC<Props> = (props) => {

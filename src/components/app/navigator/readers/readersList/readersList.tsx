@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
 import EditReaderDialog from './editReaderDialog/editReaderDialog';
 import Reader from '../../../../../models/reader';
-import { LOAD_READERS } from '../../../../../GraphQL/Queries';
+import { LOAD_READERS } from '../../../../../GraphQL/reader/Queries';
 import { useStyles } from './readersListStyles';
 import Container from '../../../../../comons/container/container';
 import { ERROR_DB } from '../../../../../utils/strings';

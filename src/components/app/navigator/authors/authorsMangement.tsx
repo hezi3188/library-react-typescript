@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { Author } from '../../../../models/author';
-import { LOAD_AUTHORS } from '../../../../GraphQL/Queries';
+import { LOAD_AUTHORS } from '../../../../GraphQL/author/Queries';
 
 const AuthorsMangement: React.FC = () => {
   const { error, loading, data } = useQuery(LOAD_AUTHORS);

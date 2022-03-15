@@ -7,7 +7,7 @@ import { Alert, Button, Snackbar } from '@mui/material';
 
 import Book from '../../../../../models/book';
 import Reader from '../../../../../models/reader';
-import { GET_BOOKS_OF_USER } from '../../../../../GraphQL/Queries';
+import { GET_BOOKS_LIST_OF_READER } from '../../../../../GraphQL/booksList/Queries';
 import { RootState } from '../../../../../redux/store';
 import { useStyles } from './booksListOfReaderStyles';
 import Container from '../../../../../comons/container/container';
@@ -33,7 +33,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
   );
-  const { loading, error, data } = useQuery(GET_BOOKS_OF_USER, {
+  const { loading, error, data } = useQuery(GET_BOOKS_LIST_OF_READER, {
     fetchPolicy: 'network-only',
     variables: { equalTo: readerData?.id },
   });
@@ -126,7 +126,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
             return (
               <BookCard
                 book={val}
-                selectFavorite={(book: Book) => selectFavorite(book)}
+                selectFavorite={(book?: Book) => selectFavorite(book)}
                 deleteHandle={() => deleteHandle(val.id)}
                 isUser={isUser}
               />

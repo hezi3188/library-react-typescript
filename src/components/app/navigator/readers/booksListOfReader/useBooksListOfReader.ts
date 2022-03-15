@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { DELETE_BOOK_TO_USER } from '../../../../../GraphQL/Queries';
-import { EDIT_READER } from '../../../../../GraphQL/Queries';
+import { DELETE_BOOKS_LIST } from '../../../../../GraphQL/booksList/Mutation';
+import { EDIT_READER } from '../../../../../GraphQL/reader/Mutation';
 import { RootState } from '../../../../../redux/store';
 import Reader from '../../../../../models/reader';
 import { editReader } from '../../../../../redux/auth';
@@ -25,7 +25,7 @@ const useBooksListOfReader = (
     (state) => state.auth.loginUser
   );
 
-  const [deleteBookToUser] = useMutation(DELETE_BOOK_TO_USER);
+  const [deleteBookToUser] = useMutation(DELETE_BOOKS_LIST);
 
   const selectFavoriteHandle = (favoriteBook: Book | undefined) => {
     selectFavoriteDb({

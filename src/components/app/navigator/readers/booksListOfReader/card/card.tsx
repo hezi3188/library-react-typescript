@@ -19,7 +19,7 @@ const AUTHOR: string = 'סופר: ';
 
 interface Props {
   book: Book;
-  selectFavorite: (book: Book) => void;
+  selectFavorite: (book?: Book) => void;
   deleteHandle: (id: number) => void;
   isUser: boolean;
 }

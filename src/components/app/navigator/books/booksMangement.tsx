@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Book from '../../../../models/book';
-import { LOAD_BOOKS } from '../../../../GraphQL/Queries';
+import { GET_BOOKS } from '../../../../GraphQL/book/Queries';
 import { ERROR_DB } from '../../../../utils/strings';
 
 const BooksMangement: React.FC = () => {
-  const { error, loading, data } = useQuery(LOAD_BOOKS);
+  const { error, loading, data } = useQuery(GET_BOOKS);
   const [books, setBooks] = useState<Book[]>([]);
   useEffect(() => {
     if (data) {

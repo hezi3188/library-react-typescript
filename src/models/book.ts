@@ -1,10 +1,8 @@
-import { Author } from "./author";
-export interface BookModel {
+import { Author } from './author';
+export interface Book {
   name: string;
   id: number;
   author: Author;
 }
-
-type Book = BookModel | undefined;
 
 export default Book;

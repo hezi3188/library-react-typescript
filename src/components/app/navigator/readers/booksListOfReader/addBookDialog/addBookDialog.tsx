@@ -17,7 +17,7 @@ import { RootState } from '../../../../../../redux/store';
 import Reader from '../../../../../../models/reader';
 import { useStyles } from './addBookDialogStyles';
 import Book from '../../../../../../models/book';
-import { ALL_BOOKS_DONT_READ_OF_USER } from '../../../../../../GraphQL/Queries';
+import { GET_BOOKS_DONT_READ_OF_READER } from '../../../../../../GraphQL/book/Queries';
 import useAddBookDialog from './useAddBookDialog';
 
 const NO_BOOKS: string = 'משתמש זה כבר השאיל את כל הספרים הקיימים בספריה!';
@@ -46,7 +46,7 @@ const AddBookDialog: React.FC<Props> = (props) => {
     handleClose: handleClose,
     addBookToUser: addBookToUser,
   });
-  const [allBooks] = useLazyQuery(ALL_BOOKS_DONT_READ_OF_USER, {
+  const [allBooks] = useLazyQuery(GET_BOOKS_DONT_READ_OF_READER, {
     fetchPolicy: 'network-only',
     nextFetchPolicy: 'network-only',
   });

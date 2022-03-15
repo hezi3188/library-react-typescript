@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 
-import { DELETE_READER } from '../../../../../GraphQL/Queries';
+import { DELETE_READER } from '../../../../../GraphQL/reader/Mutation';
 import Reader from '../../../../../models/reader';
 import {
   UseBooksListOfReaderOutput,

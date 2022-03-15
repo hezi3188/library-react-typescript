@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { logOut } from '../../../../redux/auth';
 import { RootState } from '../../../../redux/store';
-import { DELETE_READER } from '../../../../GraphQL/Queries';
+import { DELETE_READER } from '../../../../GraphQL/reader/Mutation';
 import { UseLoginInput, UseLoginOutput } from './useUpMenuInterfaces';
 import Reader from '../../../../models/reader';
 
@@ -25,7 +25,7 @@ const useAddTodo = (props: UseLoginInput): UseLoginOutput => {
 
   return {
     deleteAccount,
-    logout
+    logout,
   };
 };
 export default useAddTodo;

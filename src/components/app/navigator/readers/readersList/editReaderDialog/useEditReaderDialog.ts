@@ -8,7 +8,7 @@ import {
   UseAddBookDialogInput,
   UseAddBookDialogOutput,
 } from './useEditReaderDialogInterfaces';
-import { EDIT_READER } from '../../../../../../GraphQL/Queries';
+import { EDIT_READER } from '../../../../../../GraphQL/reader/Mutation';
 
 const useAddBookDialog = (
   props: UseAddBookDialogInput

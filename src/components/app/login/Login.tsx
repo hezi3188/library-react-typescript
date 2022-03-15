@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 
-import { LOAD_READERS } from '../../../GraphQL/Queries';
+import { LOAD_READERS } from '../../../GraphQL/reader/Queries';
 import Reader from '../../../models/reader';
 import { useStyles } from './loginStyles';
 import useLogin from './useLogin';
