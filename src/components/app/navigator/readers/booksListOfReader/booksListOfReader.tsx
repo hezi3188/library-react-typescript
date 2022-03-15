@@ -67,7 +67,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
 
   const isUser: boolean = readerData?.id === loginUser?.id;
 
-  const deleteHandle = (id: number) => {
+  const handleDelete = (id: number) => {
     setOpenDeleteDialog(true);
     setSelectedBook(id);
   };
@@ -108,7 +108,6 @@ const BooksListOfReader: React.FC<Props> = (props) => {
             <Typography variant='h6'>
               {BOOKS_OF_TITLE}{' '}
               <strong>
-                {' '}
                 {readerData.firstName} {readerData.lastName}
               </strong>
               :
@@ -128,7 +127,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
               <BookCard
                 book={val}
                 selectFavorite={(book?: Book) => selectFavorite(book)}
-                deleteHandle={() => deleteHandle(val.id)}
+                handleDelete={() => handleDelete(val.id)}
                 isUser={isUser}
               />
             );

@@ -17,12 +17,12 @@ const ID: string = 'מזהה';
 interface Props {
   onClick: () => void;
   reader: Reader;
-  deleteHandle: (reader: Reader) => void;
-  editHandle: (reader: Reader) => void;
+  handleDelete: (reader: Reader) => void;
+  handleEdit: (reader: Reader) => void;
 }
 
 const BooksListOfReader: React.FC<Props> = (props) => {
-  const { reader, deleteHandle, onClick, editHandle } = props;
+  const { reader, handleDelete, onClick, handleEdit } = props;
 
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
@@ -40,11 +40,11 @@ const BooksListOfReader: React.FC<Props> = (props) => {
       </CardContent>
       <CardActions sx={{ direction: 'rtl' }}>
         {reader?.id !== loginUser?.id && (
-          <IconButton onClick={() => deleteHandle(reader)}>
+          <IconButton onClick={() => handleDelete(reader)}>
             <DeleteIcon color='error' />
           </IconButton>
         )}
-        <IconButton onClick={() => editHandle(reader)}>
+        <IconButton onClick={() => handleEdit(reader)}>
           <EditIcon />
         </IconButton>
       </CardActions>

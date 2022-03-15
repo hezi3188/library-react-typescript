@@ -20,12 +20,12 @@ const AUTHOR: string = 'סופר: ';
 interface Props {
   book: Book;
   selectFavorite: (book?: Book) => void;
-  deleteHandle: (id: number) => void;
+  handleDelete: (id: number) => void;
   isUser: boolean;
 }
 
 const BooksListOfReader: React.FC<Props> = (props) => {
-  const { book, selectFavorite, deleteHandle, isUser } = props;
+  const { book, selectFavorite, handleDelete, isUser } = props;
 
   const loginUser = useSelector<RootState, Reader>(
     (state) => state.auth.loginUser
@@ -46,7 +46,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
         <CardActions sx={{ direction: 'rtl' }}>
           <IconButton>
             <DeleteIcon
-              onClick={() => deleteHandle(book?.id as number)}
+              onClick={() => handleDelete(book?.id as number)}
               color='error'
             />
           </IconButton>

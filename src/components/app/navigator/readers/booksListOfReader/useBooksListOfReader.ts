@@ -27,7 +27,7 @@ const useBooksListOfReader = (
 
   const [deleteBookToUser] = useMutation(DELETE_BOOKS_LIST);
 
-  const selectFavoriteHandle = (favoriteBook: Book | undefined) => {
+  const handleSelectFavorite = (favoriteBook: Book | undefined) => {
     selectFavoriteDb({
       variables: {
         favoriteBook: favoriteBook ? favoriteBook.id : null,
@@ -68,7 +68,7 @@ const useBooksListOfReader = (
   };
 
   return {
-    selectFavorite: selectFavoriteHandle,
+    selectFavorite: handleSelectFavorite,
     deleteBook: deleteBook,
     addBookToUser: addBookToUser,
   };

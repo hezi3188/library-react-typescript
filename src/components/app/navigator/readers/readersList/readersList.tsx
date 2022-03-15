@@ -74,9 +74,9 @@ const ReadersList: React.FC<Props> = (props) => {
             return (
               <ReaderCard
                 reader={val}
-                deleteHandle={() => handleDelete(val)}
+                handleDelete={() => handleDelete(val)}
                 onClick={() => getReaderData(val)}
-                editHandle={() => handleEdit(val)}
+                handleEdit={() => handleEdit(val)}
               />
             );
           }
