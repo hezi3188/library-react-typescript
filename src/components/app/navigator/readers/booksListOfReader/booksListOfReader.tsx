@@ -106,11 +106,10 @@ const BooksListOfReader: React.FC<Props> = (props) => {
         {readerData && isUser && (
           <div className={classes.upContainer}>
             <Typography variant='h6'>
-              {BOOKS_OF_TITLE}{' '}
+              {BOOKS_OF_TITLE}
               <strong>
-                {readerData.firstName} {readerData.lastName}
+                {` ${readerData.firstName} ${readerData.lastName} :`}
               </strong>
-              :
             </Typography>
             <Button
               onClick={() => setOpenAddDialog(true)}

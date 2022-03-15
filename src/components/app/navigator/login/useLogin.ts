@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { UseLoginInput, UseLoginOutput } from './useLoginInterfaces';
-import { login } from '../../../redux/auth';
+import { login } from '../../../../redux/auth';
 
 const useAddTodo = (props: UseLoginInput): UseLoginOutput => {
   const { readers } = props;

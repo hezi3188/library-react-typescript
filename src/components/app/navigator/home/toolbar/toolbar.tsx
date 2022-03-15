@@ -2,11 +2,11 @@ import { Button, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useStyles } from './upMenuStyles';
-import { RootState } from '../../../../redux/store';
-import Reader from '../../../../models/reader';
-import ConfirmDialog from '../../../../comons/confirmDialog/confirmDialog';
-import useUpMenu from './useUpMenu';
+import { useStyles } from './toolbarStyles';
+import { RootState } from '../../../../../redux/store';
+import Reader from '../../../../../models/reader';
+import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
+import useUpMenu from './useToolbar';
 
 const LIBRARY_TITLE: string = 'הספריה';
 const HELLO_TITLE: string = ' שלום ';
@@ -58,10 +58,10 @@ const Menu: React.FC = () => {
       </div>
       <div className={classes.upMenuLeft}>
         <div className={classes.loginOutput}>
-          <Typography sx={{ fontSize: '4vh' }} align='center' variant='h5'>
-            {HELLO_TITLE} {loginUser?.firstName} {loginUser?.lastName}
+          <Typography sx={{ fontSize: '3.3vh' }} align='center' variant='h5'>
+            {`${HELLO_TITLE} ${loginUser?.firstName} ${loginUser?.lastName}`}
           </Typography>
-          <Typography align='center' variant='h6' sx={{ fontSize: '2.7vh' }}>
+          <Typography align='center' variant='h6' sx={{ fontSize: '2.6vh' }}>
             {loginUser?.favoriteBook?.name
               ? `${FAVORITE_TITLE} ${loginUser.favoriteBook.name}`
               : NO_FAVORITE}

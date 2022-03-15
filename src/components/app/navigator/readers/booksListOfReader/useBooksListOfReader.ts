@@ -57,13 +57,7 @@ const useBooksListOfReader = (
     setOpenMessage(true);
     setBooks([...books, book]);
     setMessage(
-      BOOK_TITLE +
-        book?.name +
-        ' ' +
-        ADD_BOOK_TITLE +
-        loginUser?.firstName +
-        ' ' +
-        loginUser?.lastName
+      `${BOOK_TITLE} ${book?.name}  ${ADD_BOOK_TITLE}${loginUser?.firstName} ${loginUser?.lastName}`
     );
   };
 

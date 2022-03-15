@@ -31,11 +31,10 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     <CustomCard>
       <CardContent onClick={onClick}>
         <Typography variant='h5' component='div'>
-          {ID} {reader?.id}
+          {` ${ID} ${reader?.id}`}
         </Typography>
         <Typography variant='body1' component='div'>
-          {NAME}
-          {reader?.firstName} {reader?.lastName}
+          {`${NAME} ${reader?.firstName} ${reader?.lastName}`}
         </Typography>
       </CardContent>
       <CardActions sx={{ direction: 'rtl' }}>

@@ -11,7 +11,6 @@ import {
 } from '@apollo/client';
 import { useSelector } from 'react-redux';
 
-import Login from './login/Login';
 import Navigator from './navigator/navigator';
 import { RootState } from '../../redux/store';
 import Reader from '../../models/reader';
@@ -41,7 +40,7 @@ const App: React.FC = () => {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client}>
-          {auth ? <Navigator /> : <Login />}
+          <Navigator />
         </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>

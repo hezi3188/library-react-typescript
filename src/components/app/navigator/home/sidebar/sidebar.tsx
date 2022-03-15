@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 
-import { useStyles } from './rightMenuStyles';
+import { useStyles } from './sidebarStyles';
 import { useNavigate } from 'react-router-dom';
 
 const USER_MANGE_TITLE: string = 'ניהול משתמשים';
@@ -21,7 +21,7 @@ const Menu: React.FC = () => {
         size='large'
         color='inherit'
         variant='text'
-        onClick={() => navigate('/')}
+        onClick={() => navigate('readers')}
       >
         {USER_MANGE_TITLE}
       </Button>

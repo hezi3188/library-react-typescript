@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/components/app/navigator/upMenu/.useLogin.ts"  ]
+, "src/components/app/navigator/home/upMenu/.useLogin.ts"  ]
 }

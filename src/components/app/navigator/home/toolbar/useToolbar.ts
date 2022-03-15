@@ -2,11 +2,11 @@ import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { useSelector } from 'react-redux';
 
-import { logOut } from '../../../../redux/auth';
-import { RootState } from '../../../../redux/store';
-import { DELETE_READER } from '../../../../GraphQL/reader/Mutation';
-import { UseLoginInput, UseLoginOutput } from './useUpMenuInterfaces';
-import Reader from '../../../../models/reader';
+import { logOut } from '../../../../../redux/auth';
+import { RootState } from '../../../../../redux/store';
+import { DELETE_READER } from '../../../../../GraphQL/reader/Mutation';
+import { UseLoginInput, UseLoginOutput } from './useToolbarInterfaces';
+import Reader from '../../../../../models/reader';
 
 const useAddTodo = (props: UseLoginInput): UseLoginOutput => {
   const dispatch = useDispatch();

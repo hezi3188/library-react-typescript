@@ -8,12 +8,13 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import { useNavigate } from 'react-router-dom';
 
-import { LOAD_READERS } from '../../../GraphQL/reader/Queries';
-import Reader from '../../../models/reader';
+import { LOAD_READERS } from '../../../../GraphQL/reader/Queries';
+import Reader from '../../../../models/reader';
 import { useStyles } from './loginStyles';
 import useLogin from './useLogin';
-import { ERROR_DB } from '../../../utils/strings';
+import { ERROR_DB } from '../../../../utils/strings';
 
 const LIBRARY_TITLE: string = 'הספריה';
 const CHOOSE_READER: string = 'בחר משתמש להתחברות';
@@ -21,6 +22,8 @@ const LOGIN_TITLE: string = 'התחבר';
 
 const Login: React.FC = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
   const { error, loading, data } = useQuery(LOAD_READERS, {
     fetchPolicy: 'network-only',
   });
@@ -81,6 +84,7 @@ const Login: React.FC = () => {
           onClick={() => {
             if (selectedReader) {
               loginUser(selectedReader);
+              navigate('home')
             }
           }}
           color='success'

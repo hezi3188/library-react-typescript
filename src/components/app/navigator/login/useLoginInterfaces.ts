@@ -1,4 +1,4 @@
-import Reader from '../../../models/reader';
+import Reader from '../../../../models/reader';
 
 export interface UseLoginInput {
   readers: Reader[];

@@ -34,12 +34,10 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     <CustomCard>
       <CardContent>
         <Typography variant='h5' component='div'>
-          {ID} {book?.id}
+          {`${ID} ${book?.id}`}
         </Typography>
         <Typography variant='body1' component='div'>
-          {NAME}
-          {book?.name}. {AUTHOR} {book?.author.firstName}{' '}
-          {book?.author.lastName}
+          {`${NAME} ${book?.name}. ${AUTHOR} ${book?.author.firstName} ${book?.author.lastName}`}
         </Typography>
       </CardContent>
       {isUser && (
