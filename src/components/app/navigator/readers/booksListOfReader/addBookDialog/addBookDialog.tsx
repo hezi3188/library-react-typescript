@@ -66,7 +66,7 @@ const AddBookDialog: React.FC<Props> = (props) => {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      {books.length === 0 ? (
+      {!books.length ? (
         <Typography align='center' variant='h6'>
           {NO_BOOKS}
         </Typography>
