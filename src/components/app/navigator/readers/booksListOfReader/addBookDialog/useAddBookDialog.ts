@@ -30,7 +30,7 @@ const useAddBookDialog = (
   };
 
   return {
-    addBook: addBook,
+    addBook,
   };
 };
 export default useAddBookDialog;

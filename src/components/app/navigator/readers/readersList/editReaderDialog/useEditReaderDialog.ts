@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
+
 import Reader from '../../../../../../models/reader';
 import { RootState } from '../../../../../../redux/store';
 import { editReader as editReaderRdx } from '../../../../../../redux/auth';
-
 import {
   UseAddBookDialogInput,
   UseAddBookDialogOutput,
@@ -28,8 +28,8 @@ const useAddBookDialog = (
     editReaderDb({
       variables: {
         id: readerId,
-        firstName: firstName,
-        lastName: lastName,
+        firstName,
+        lastName,
       },
     }).then(() => {
       handleClose();
@@ -46,7 +46,7 @@ const useAddBookDialog = (
   };
 
   return {
-    editReader: editReader,
+    editReader,
   };
 };
 export default useAddBookDialog;

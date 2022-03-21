@@ -63,8 +63,8 @@ const useBooksListOfReader = (
 
   return {
     selectFavorite: handleSelectFavorite,
-    deleteBook: deleteBook,
-    addBookToUser: addBookToUser,
+    deleteBook,
+    addBookToUser,
   };
 };
 export default useBooksListOfReader;
