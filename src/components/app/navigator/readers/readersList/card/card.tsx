@@ -30,21 +30,21 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   return (
     <CustomCard>
       <CardContent onClick={onClick}>
-        <Typography variant='h5' component='div'>
+        <Typography sx={{ fontSize: '3.5vh' }} variant='h5' component='div'>
           {` ${ID} ${reader?.id}`}
         </Typography>
-        <Typography variant='body1' component='div'>
+        <Typography sx={{ fontSize: '2vh' }} variant='body1' component='div'>
           {`${NAME} ${reader?.firstName} ${reader?.lastName}`}
         </Typography>
       </CardContent>
       <CardActions sx={{ direction: 'rtl' }}>
         {reader?.id !== loginUser?.id && (
           <IconButton onClick={() => handleDelete(reader)}>
-            <DeleteIcon color='error' />
+            <DeleteIcon sx={{ height: '4vh' }} color='error' />
           </IconButton>
         )}
         <IconButton onClick={() => handleEdit(reader)}>
-          <EditIcon />
+          <EditIcon sx={{ height: '4vh' }} />
         </IconButton>
       </CardActions>
     </CustomCard>

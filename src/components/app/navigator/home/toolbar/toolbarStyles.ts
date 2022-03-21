@@ -17,7 +17,6 @@ export const useStyles = makeStyles({
     '& *': {
       margin: '4px',
     },
-    // width: '15vw',
     height: '8vh',
   },
   loginOutput: {

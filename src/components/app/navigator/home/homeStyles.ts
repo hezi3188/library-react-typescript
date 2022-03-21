@@ -16,9 +16,9 @@ export const useStyles = makeStyles({
   },
   rightContainer: {
     border: '1px solid',
-    flex: 1,
+    width: '10%',
   },
   leftContainer: {
-    flex: 7,
+    width:"90%"
   },
 });

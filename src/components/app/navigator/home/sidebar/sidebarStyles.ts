@@ -7,4 +7,7 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  btn: {
+    fontSize: '4vh',
+  },
 });

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
@@ -37,6 +37,9 @@ const BooksListOfReader: React.FC<Props> = (props) => {
     fetchPolicy: 'network-only',
     variables: { equalTo: readerData?.id },
   });
+  const isUser: boolean = useMemo<boolean>((): boolean => {
+    return readerData?.id === loginUser?.id;
+  }, [readerData, loginUser]);
 
   const [books, setBooks] = useState<Book[]>([]);
   const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
@@ -64,8 +67,6 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   if (error && readerData) {
     return <h1>{ERROR_DB}</h1>;
   }
-
-  const isUser: boolean = readerData?.id === loginUser?.id;
 
   const handleDelete = (id: number) => {
     setOpenDeleteDialog(true);
@@ -105,7 +106,7 @@ const BooksListOfReader: React.FC<Props> = (props) => {
       <Container>
         {readerData && isUser && (
           <div className={classes.upContainer}>
-            <Typography variant='h6'>
+            <Typography style={{ fontSize: '4vh' }} variant='h6'>
               {BOOKS_OF_TITLE}
               <strong>
                 {` ${readerData.firstName} ${readerData.lastName} :`}

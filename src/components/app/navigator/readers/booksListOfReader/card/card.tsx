@@ -33,10 +33,10 @@ const BooksListOfReader: React.FC<Props> = (props) => {
   return (
     <CustomCard>
       <CardContent>
-        <Typography variant='h5' component='div'>
+        <Typography sx={{ fontSize: '3.5vh' }} variant='h5' component='div'>
           {`${ID} ${book?.id}`}
         </Typography>
-        <Typography variant='body1' component='div'>
+        <Typography sx={{ fontSize: '2vh' }} variant='body1' component='div'>
           {`${NAME} ${book?.name}. ${AUTHOR} ${book?.author.firstName} ${book?.author.lastName}`}
         </Typography>
       </CardContent>
@@ -44,17 +44,21 @@ const BooksListOfReader: React.FC<Props> = (props) => {
         <CardActions sx={{ direction: 'rtl' }}>
           <IconButton>
             <DeleteIcon
+              sx={{ height: '4vh' }}
               onClick={() => handleDelete(book?.id as number)}
               color='error'
             />
           </IconButton>
           {loginUser?.favoriteBook?.id !== book?.id ? (
             <IconButton>
-              <StarBorderIcon onClick={() => selectFavorite(book)} />
+              <StarBorderIcon
+                sx={{ height: '4vh' }}
+                onClick={() => selectFavorite(book)}
+              />
             </IconButton>
           ) : (
             <IconButton onClick={() => selectFavorite(undefined)}>
-              <StarIcon sx={{ color: 'yellow' }} />
+              <StarIcon sx={{ color: 'yellow', height: '4vh' }} />
             </IconButton>
           )}
         </CardActions>

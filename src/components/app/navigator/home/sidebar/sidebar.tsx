@@ -40,6 +40,7 @@ const Menu: React.FC = () => {
             size='large'
             color='inherit'
             variant='text'
+            sx={{ fontSize: '3vh' }}
             onClick={() => navigate(item.navigate)}
           >
             {item.text}

@@ -21,7 +21,7 @@ export const GET_BOOK = gql`
 `;
 
 export const GET_BOOKS_DONT_READ_OF_READER = gql`
-  query MyQuery($equalTo: Int) {
+  query GetBooksDontReadOfReader($equalTo: Int) {
     allBooks(
       filter: {
         booksListsByBookId: {

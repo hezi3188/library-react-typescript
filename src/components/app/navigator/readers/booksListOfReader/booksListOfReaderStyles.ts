@@ -7,7 +7,7 @@ export const useStyles = makeStyles({
     justifyContent: 'space-between',
     margin: '4px',
     height: '90%',
-    width: '98%',
+    width: '50%',
   },
   upContainer: {
     display: 'flex',

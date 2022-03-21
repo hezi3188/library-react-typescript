@@ -5,9 +5,9 @@ export const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: '4px',
+    // margin: '4px',
     height: '80vh',
-    width: '45vw',
+    width: '100%',
   },
   container: {
     overflowY: 'auto',
