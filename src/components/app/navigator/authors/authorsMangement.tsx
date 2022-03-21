@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Outlet } from 'react-router-dom';
 
 import { Author } from '../../../../models/author';
 import { LOAD_AUTHORS } from '../../../../GraphQL/author/Queries';
@@ -26,7 +25,6 @@ const AuthorsMangement: React.FC = () => {
       {authors.map((val: Author) => {
         return <h1> {val.firstName}</h1>;
       })}
-      <Outlet />
     </div>
   );
 };

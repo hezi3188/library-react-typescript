@@ -7,20 +7,13 @@ import AuthorsMangement from './authors/authorsMangement';
 import BooksMangement from './books/booksMangement';
 import Home from './home/home';
 import Login from './login/login';
-import { useStyles } from './navigatorStyles';
 import { RootState } from '../../../redux/store';
 import Reader from '../../../models/reader';
 
 const Navigator: React.FC = () => {
-  const classes = useStyles();
   const auth = useSelector<RootState, Reader>((state) => state.auth.loginUser);
   return (
     <BrowserRouter>
-      {/* <div className={classes.root}>
-        <div className={classes.menu}></div>
-        <div className={classes.container}>
-          <div className={classes.rightContainer}></div>
-          <div className={classes.leftContainer}> */}
       <Routes>
         <Route path='/' element={<Login />} />
         {auth ? (
@@ -33,9 +26,6 @@ const Navigator: React.FC = () => {
           <Route path='*' element={<Navigate to='/' />} />
         )}
       </Routes>
-      {/* </div>
-        </div>
-      </div> */}
     </BrowserRouter>
   );
 };

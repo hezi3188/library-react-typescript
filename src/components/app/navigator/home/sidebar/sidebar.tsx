@@ -8,39 +8,44 @@ const USER_MANGE_TITLE: string = 'ניהול משתמשים';
 const AUTHOR_MANGE_TITLE: string = 'ניהול סופרים';
 const BOOKS_MANGE_TITLE: string = 'ניהול ספרים';
 
+interface NavigateItem {
+  navigate: string;
+  text: string;
+}
+
 const Menu: React.FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const menuItem ={
-    navigate: '/',
-    text: USER_MANGE_TITLE,
-  }
+
+  const Items: NavigateItem[] = [
+    {
+      navigate: 'readers',
+      text: USER_MANGE_TITLE,
+    },
+    {
+      navigate: 'authors',
+      text: AUTHOR_MANGE_TITLE,
+    },
+    {
+      navigate: 'books',
+      text: BOOKS_MANGE_TITLE,
+    },
+  ];
+
   return (
     <div className={classes.root}>
-      <Button
-        size='large'
-        color='inherit'
-        variant='text'
-        onClick={() => navigate('readers')}
-      >
-        {USER_MANGE_TITLE}
-      </Button>
-      <Button
-        size='large'
-        color='inherit'
-        variant='text'
-        onClick={() => navigate('authors')}
-      >
-        {AUTHOR_MANGE_TITLE}
-      </Button>
-      <Button
-        size='large'
-        color='inherit'
-        variant='text'
-        onClick={() => navigate('books')}
-      >
-        {BOOKS_MANGE_TITLE}
-      </Button>
+      {Items.map((item: NavigateItem) => {
+        return (
+          <Button
+            size='large'
+            color='inherit'
+            variant='text'
+            onClick={() => navigate(item.navigate)}
+          >
+            {item.text}
+          </Button>
+        );
+      })}
     </div>
   );
 };
