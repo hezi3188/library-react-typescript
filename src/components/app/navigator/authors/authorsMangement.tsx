@@ -1,32 +1,22 @@
-import { useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import React, { useState } from 'react';
 
-import { Author } from '../../../../models/author';
-import { LOAD_AUTHORS } from '../../../../GraphQL/author/Queries';
+import { useStyles } from './authorsMangementStyles';
+import ReadersList from './authorsList/authorsList';
+import BooksListOfReader from './booksListOfAuthor/booksListOfAuthor';
+import Reader from '../../../../models/reader';
 
-const AuthorsMangement: React.FC = () => {
-  const { error, loading, data } = useQuery(LOAD_AUTHORS);
-  const [authors, setAuthors] = useState<Author[]>([]);
-  useEffect(() => {
-    if (data) {
-      setAuthors(data.allAuthors.nodes);
-    }
-  }, [data]);
-  if (loading) {
-    return <CircularProgress />;
-  }
-  if (error) {
-    return <h1>ה</h1>;
-  }
+const ReadersMangement: React.FC = () => {
+  const classes = useStyles();
+  const [selectedReader, setSelectedReader] = useState<Reader>();
+
   return (
-    <div>
-      ff
-      {authors.map((val: Author) => {
-        return <h1> {val.firstName}</h1>;
-      })}
+    <div className={classes.root}>
+      <ReadersList
+        getReaderData={(readerData: Reader) => setSelectedReader(readerData)}
+      />
+      <BooksListOfReader readerData={selectedReader} />
     </div>
   );
 };
 
-export default AuthorsMangement;
+export default ReadersMangement;
