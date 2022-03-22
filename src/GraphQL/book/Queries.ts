@@ -6,6 +6,11 @@ export const GET_BOOKS = gql`
       nodes {
         name
         id
+        author: authorByAuthorId {
+          firstName
+          id
+          lastName
+        }
       }
     }
   }

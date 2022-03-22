@@ -5,7 +5,6 @@ export const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // margin: '4px',
     height: '100%',
     width: '98%',
   },

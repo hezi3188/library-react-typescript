@@ -17,3 +17,26 @@ export const GET_BOOKS_LIST_OF_READER = gql`
     }
   }
 `;
+
+export const ALL_READERS_OF_BOOK = gql`
+  query AllReadersOfBook($equalTo: Int!) {
+    allBooksLists(filter: { bookId: { equalTo: $equalTo } }) {
+      nodes {
+        readerByReaderId {
+          firstName
+          id
+          lastName
+          favoriteBook: bookByFavoriteBook {
+            name
+            id
+            author: authorByAuthorId {
+              firstName
+              id
+              lastName
+            }
+          }
+        }
+      }
+    }
+  }
+`;

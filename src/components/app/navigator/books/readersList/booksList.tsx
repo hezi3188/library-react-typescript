@@ -3,48 +3,48 @@ import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
-import EditReaderDialog from './editReaderDialog/editReaderDialog';
-import Reader from '../../../../../models/reader';
-import { LOAD_READERS } from '../../../../../GraphQL/reader/Queries';
-import { useStyles } from './readersListStyles';
+import EditBookDialog from './editBookDialog/editBookDialog';
+import { GET_BOOKS } from '../../../../../GraphQL/book/Queries';
+import { useStyles } from './booksListStyles';
 import Container from '../../../../../comons/container/container';
 import { ERROR_DB } from '../../../../../utils/strings';
-import useReadersList from './useReadersList';
-import ReaderCard from './card/card';
+import useBooksList from './useBooksList';
+import BookCard from './card/card';
+import Book from '../../../../../models/book';
 
 const DELETE_DIALOG_TITLE: string = 'זהירות!';
 const DELETE_DIALOG_MESSAGE: string = 'האם אתה בטוח שברצונך למחוק?';
 
 interface Props {
-  getReaderData: (reader: Reader) => void;
+  getBookData: (book: Book) => void;
 }
 
-const ReadersList: React.FC<Props> = (props) => {
+const BooksList: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const { getReaderData } = props;
-  const { error, loading, data } = useQuery(LOAD_READERS);
-  const [readers, setReaders] = useState<Reader[]>([]);
-  const [selectedReader, setSelectedReader] = useState<Reader>();
+  const { getBookData } = props;
+  const { error, loading, data } = useQuery(GET_BOOKS);
+  const [books, setBooks] = useState<Book[]>([]);
+  const [selectedBook, setSelectedBook] = useState<Book>();
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
   const [openEditDialog, setEditAddDialog] = useState<boolean>(false);
 
-  const { deleteReader } = useReadersList({
-    readers: readers,
-    setReaders: setReaders,
+  const { deleteBook } = useBooksList({
+    books: books,
+    setBooks: setBooks,
   });
 
-  const handleEdit = (r: Reader) => {
+  const handleEdit = (book: Book) => {
     setEditAddDialog(true);
-    setSelectedReader(r);
+    setSelectedBook(book);
   };
-  const handleDelete = (r: Reader) => {
+  const handleDelete = (book: Book) => {
     setOpenDeleteDialog(true);
-    setSelectedReader(r);
+    setSelectedBook(book);
   };
 
   useEffect(() => {
     if (data) {
-      setReaders(data.allReaders.nodes);
+      setBooks(data.allBooks.nodes);
     }
   }, [data]);
 
@@ -56,8 +56,8 @@ const ReadersList: React.FC<Props> = (props) => {
   }
   return (
     <div className={classes.root}>
-      <EditReaderDialog
-        reader={selectedReader}
+      <EditBookDialog
+        book={selectedBook}
         open={openEditDialog}
         onClose={() => setEditAddDialog(false)}
       />
@@ -66,16 +66,16 @@ const ReadersList: React.FC<Props> = (props) => {
         title={DELETE_DIALOG_TITLE}
         message={DELETE_DIALOG_MESSAGE}
         onClose={() => setOpenDeleteDialog(false)}
-        onConfirm={() => deleteReader(selectedReader?.id as number)}
+        onConfirm={() => deleteBook(selectedBook?.id as number)}
       />
       <Container>
-        {readers.map((val: Reader) => {
+        {books.map((val: Book) => {
           if (val) {
             return (
-              <ReaderCard
-                reader={val}
+              <BookCard
+                book={val}
                 handleDelete={() => handleDelete(val)}
-                onClick={() => getReaderData(val)}
+                onClick={() => getBookData(val)}
                 handleEdit={() => handleEdit(val)}
               />
             );
@@ -86,4 +86,4 @@ const ReadersList: React.FC<Props> = (props) => {
   );
 };
 
-export default ReadersList;
+export default BooksList;
