@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { useStyles } from './booksMangementStyles';
-import BooksList from './readersList/booksList';
-import ReadersListOfBook from './booksListOfReader/readersListOfBook';
+import BooksList from './booksList/booksList';
+import ReadersListOfBook from './readersListOfBook/readersListOfBook';
 import Book from '../../../../models/book';
 
 const BooksMangement: React.FC = () => {

@@ -23,12 +23,12 @@ const Menu: React.FC = () => {
       text: USER_MANGE_TITLE,
     },
     {
-      navigate: 'authors',
-      text: AUTHOR_MANGE_TITLE,
-    },
-    {
       navigate: 'books',
       text: BOOKS_MANGE_TITLE,
+    },
+    {
+      navigate: 'authors',
+      text: AUTHOR_MANGE_TITLE,
     },
   ];
 
