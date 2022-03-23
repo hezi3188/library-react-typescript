@@ -1,6 +1,6 @@
-export interface UseAddBookDialogInput {
+export interface UseEditAuthorDialogIncome {
   handleClose: () => void;
 }
-export interface UseAddBookDialogOutput {
-  editReader: (firstName: string, lastName: string, readerId: number) => void;
+export interface UseEditAuthorDialogOutcome {
+  editAuthor: (firstName: string, lastName: string, authorId: number) => void;
 }

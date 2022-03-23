@@ -1,9 +1,9 @@
-import Reader from '../../../../../models/reader';
+import { Author } from '../../../../../models/author';
 
-export interface UseBooksListOfReaderInput {
-  readers: Reader[];
-  setReaders: (readers: Reader[]) => void;
+export interface UseAuthorListIncome {
+  authors: Author[];
+  setAuthors: (author: Author[]) => void;
 }
-export interface UseBooksListOfReaderOutput {
-  deleteReader: (id: number) => void;
+export interface UseAuthorsListOutcome {
+  deleteAuthor: (id: number) => void;
 }

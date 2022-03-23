@@ -3,48 +3,48 @@ import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import ConfirmDialog from '../../../../../comons/confirmDialog/confirmDialog';
-import EditReaderDialog from './editAuthorDialog/editAuthorDialog';
-import Reader from '../../../../../models/reader';
-import { LOAD_READERS } from '../../../../../GraphQL/reader/Queries';
+import EditAuthorDialog from './editAuthorDialog/editAuthorDialog';
+import { LOAD_AUTHORS } from '../../../../../GraphQL/author/Queries';
 import { useStyles } from './authorsListStyles';
 import Container from '../../../../../comons/container/container';
 import { ERROR_DB } from '../../../../../utils/strings';
-import useReadersList from './useAuthorsList';
-import ReaderCard from './card/card';
+import useAuthorsList from './useAuthorsList';
+import AuthorCard from './card/card';
+import { Author } from '../../../../../models/author';
 
 const DELETE_DIALOG_TITLE: string = 'זהירות!';
 const DELETE_DIALOG_MESSAGE: string = 'האם אתה בטוח שברצונך למחוק?';
 
 interface Props {
-  getReaderData: (reader: Reader) => void;
+  getAuthorData: (author: Author) => void;
 }
 
-const ReadersList: React.FC<Props> = (props) => {
+const AuthorsList: React.FC<Props> = (props) => {
   const classes = useStyles();
-  const { getReaderData } = props;
-  const { error, loading, data } = useQuery(LOAD_READERS);
-  const [readers, setReaders] = useState<Reader[]>([]);
-  const [selectedReader, setSelectedReader] = useState<Reader>();
+  const { getAuthorData } = props;
+  const { error, loading, data } = useQuery(LOAD_AUTHORS);
+  const [authors, setAuthors] = useState<Author[]>([]);
+  const [selectedAuthor, setSelectedAuthor] = useState<Author>();
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
-  const [openEditDialog, setEditAddDialog] = useState<boolean>(false);
+  const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
 
-  const { deleteReader } = useReadersList({
-    readers: readers,
-    setReaders: setReaders,
+  const { deleteAuthor } = useAuthorsList({
+    authors,
+    setAuthors,
   });
 
-  const handleEdit = (r: Reader) => {
-    setEditAddDialog(true);
-    setSelectedReader(r);
+  const handleEdit = (author: Author) => {
+    setOpenEditDialog(true);
+    setSelectedAuthor(author);
   };
-  const handleDelete = (r: Reader) => {
+  const handleDelete = (author: Author) => {
     setOpenDeleteDialog(true);
-    setSelectedReader(r);
+    setSelectedAuthor(author);
   };
 
   useEffect(() => {
     if (data) {
-      setReaders(data.allReaders.nodes);
+      setAuthors(data.allAuthors.nodes);
     }
   }, [data]);
 
@@ -56,26 +56,26 @@ const ReadersList: React.FC<Props> = (props) => {
   }
   return (
     <div className={classes.root}>
-      <EditReaderDialog
-        reader={selectedReader}
+      <EditAuthorDialog
+        author={selectedAuthor}
         open={openEditDialog}
-        onClose={() => setEditAddDialog(false)}
+        onClose={() => setOpenEditDialog(false)}
       />
       <ConfirmDialog
         open={openDeleteDialog}
         title={DELETE_DIALOG_TITLE}
         message={DELETE_DIALOG_MESSAGE}
         onClose={() => setOpenDeleteDialog(false)}
-        onConfirm={() => deleteReader(selectedReader?.id as number)}
+        onConfirm={() => deleteAuthor(selectedAuthor?.id as number)}
       />
       <Container>
-        {readers.map((val: Reader) => {
+        {authors.map((val: Author) => {
           if (val) {
             return (
-              <ReaderCard
-                reader={val}
+              <AuthorCard
+                author={val}
                 handleDelete={() => handleDelete(val)}
-                onClick={() => getReaderData(val)}
+                onClick={() => getAuthorData(val)}
                 handleEdit={() => handleEdit(val)}
               />
             );
@@ -86,4 +86,4 @@ const ReadersList: React.FC<Props> = (props) => {
   );
 };
 
-export default ReadersList;
+export default AuthorsList;

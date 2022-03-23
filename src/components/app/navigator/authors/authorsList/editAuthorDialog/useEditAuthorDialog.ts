@@ -1,52 +1,35 @@
 import { useMutation } from '@apollo/client';
-import { useSelector, useDispatch } from 'react-redux';
 
-import Reader from '../../../../../../models/reader';
-import { RootState } from '../../../../../../redux/store';
-import { editReader as editReaderRdx } from '../../../../../../redux/auth';
 import {
-  UseAddBookDialogInput,
-  UseAddBookDialogOutput,
+  UseEditAuthorDialogIncome,
+  UseEditAuthorDialogOutcome,
 } from './useEditAuthorDialogInterfaces';
-import { EDIT_READER } from '../../../../../../GraphQL/reader/Mutation';
+import { EDIT_AUTHOR } from '../../../../../../GraphQL/author/Mutation';
 
 const useAddBookDialog = (
-  props: UseAddBookDialogInput
-): UseAddBookDialogOutput => {
+  props: UseEditAuthorDialogIncome
+): UseEditAuthorDialogOutcome => {
   const { handleClose } = props;
-  const [editReaderDb] = useMutation(EDIT_READER);
-  const dispatch = useDispatch();
-  const loginUser = useSelector<RootState, Reader>(
-    (state) => state.auth.loginUser
-  );
+  const [editAuthorDb] = useMutation(EDIT_AUTHOR);
 
-  const editReader = (
+  const editAuthor = (
     firstName: string,
     lastName: string,
-    readerId: number
+    authorId: number
   ) => {
-    editReaderDb({
+    editAuthorDb({
       variables: {
-        id: readerId,
+        id: authorId,
         firstName,
         lastName,
       },
     }).then(() => {
       handleClose();
-      if (loginUser?.id === readerId) {
-        let copyState: Reader = {
-          id: loginUser?.id,
-          lastName: lastName,
-          firstName: firstName,
-          favoriteBook: loginUser?.favoriteBook,
-        };
-        dispatch(editReaderRdx(copyState));
-      }
     });
   };
 
   return {
-    editReader,
+    editAuthor,
   };
 };
 export default useAddBookDialog;

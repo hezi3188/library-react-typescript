@@ -1,31 +1,29 @@
 import { useMutation } from '@apollo/client';
 
-import { DELETE_READER } from '../../../../../GraphQL/reader/Mutation';
-import Reader from '../../../../../models/reader';
+import { DELETE_AUTHOR } from '../../../../../GraphQL/author/Mutation';
+import { Author } from '../../../../../models/author';
 import {
-  UseBooksListOfReaderOutput,
-  UseBooksListOfReaderInput,
+  UseAuthorsListOutcome,
+  UseAuthorListIncome,
 } from './UseAuthorsListInterfaces';
 
-const useBooksListOfReader = (
-  props: UseBooksListOfReaderInput
-): UseBooksListOfReaderOutput => {
-  const { readers, setReaders } = props;
+const useAutherList = (props: UseAuthorListIncome): UseAuthorsListOutcome => {
+  const { authors, setAuthors } = props;
 
-  const [deleteReader] = useMutation(DELETE_READER);
+  const [deleteAuthor] = useMutation(DELETE_AUTHOR);
 
-  const handleDeleteReader = (id: number) => {
-    deleteReader({
+  const handleDeleteAuthor = (id: number) => {
+    deleteAuthor({
       variables: {
         id,
       },
     }).then(() => {
-      setReaders(readers.filter((item: Reader) => item?.id !== id));
+      setAuthors(authors.filter((item: Author) => item?.id !== id));
     });
   };
 
   return {
-    deleteReader: handleDeleteReader,
+    deleteAuthor: handleDeleteAuthor,
   };
 };
-export default useBooksListOfReader;
+export default useAutherList;

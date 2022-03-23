@@ -42,3 +42,18 @@ export const GET_BOOKS_DONT_READ_OF_READER = gql`
     }
   }
 `;
+export const GET_BOOKS_OF_AUTHOR = gql`
+  query GetBooksOfAuthor($equalTo: Int) {
+    allBooks(filter: { authorId: { equalTo: $equalTo } }) {
+      nodes {
+        name
+        id
+        author: authorByAuthorId {
+          firstName
+          lastName
+          id
+        }
+      }
+    }
+  }
+`;

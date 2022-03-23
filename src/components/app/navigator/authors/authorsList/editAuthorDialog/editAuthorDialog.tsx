@@ -8,22 +8,22 @@ import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 
-import Reader from '../../../../../../models/reader';
 import { useStyles } from './editAuthorDialogStyles';
 import useAddBookDialog from './useEditAuthorDialog';
+import { Author } from '../../../../../../models/author';
 
-const EDIT_READER_TITLE: string = 'פרטי משתמש';
-const EDIT_READER_BUTTON: string = 'שמור שינויים';
+const EDIT_AUTHOR_TITLE: string = 'פרטי משתמש';
+const EDIT_AUTHOR_BUTTON: string = 'שמור שינויים';
 const FIRST_NAME: string = 'שם פרטי';
 const LAST_NAME: string = 'שם משפחה';
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  reader: Reader;
+  author?: Author;
 }
 const AddBookDialog: React.FC<Props> = (props) => {
-  const { open, onClose, reader } = props;
+  const { open, onClose, author } = props;
   const classes = useStyles();
 
   const handleClose = () => {
@@ -31,18 +31,18 @@ const AddBookDialog: React.FC<Props> = (props) => {
   };
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
-  const { editReader: addBook } = useAddBookDialog({
-    handleClose: handleClose,
+  const { editAuthor: addBook } = useAddBookDialog({
+    handleClose,
   });
 
   useEffect(() => {
-    setFirstName(reader?.firstName);
-    setLastName(reader?.lastName);
-  }, [reader, onClose]);
+    setFirstName(author?.firstName);
+    setLastName(author?.lastName);
+  }, [author, onClose]);
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{EDIT_READER_TITLE}</DialogTitle>
+      <DialogTitle>{EDIT_AUTHOR_TITLE}</DialogTitle>
       <DialogContent>
         <FormControl className={classes.select}>
           <TextField
@@ -68,11 +68,11 @@ const AddBookDialog: React.FC<Props> = (props) => {
             addBook(
               firstName as string,
               lastName as string,
-              reader?.id as number
+              author?.id as number
             )
           }
         >
-          {EDIT_READER_BUTTON}
+          {EDIT_AUTHOR_BUTTON}
         </Button>
       </DialogActions>
     </Dialog>

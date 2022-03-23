@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 
 import { useStyles } from './authorsMangementStyles';
-import ReadersList from './authorsList/authorsList';
-import BooksListOfReader from './booksListOfAuthor/booksListOfAuthor';
-import Reader from '../../../../models/reader';
+import AuthorsList from './authorsList/authorsList';
+import BooksListOfAuthor from './booksListOfAuthor/booksListOfAuthor';
+import { Author } from '../../../../models/author';
 
-const ReadersMangement: React.FC = () => {
+const AuthorsMangement: React.FC = () => {
   const classes = useStyles();
-  const [selectedReader, setSelectedReader] = useState<Reader>();
+  const [selectedAuthor, setSelectedAuthor] = useState<Author>();
 
   return (
     <div className={classes.root}>
-      <ReadersList
-        getReaderData={(readerData: Reader) => setSelectedReader(readerData)}
+      <AuthorsList
+        getAuthorData={(authorData: Author) => setSelectedAuthor(authorData)}
       />
-      <BooksListOfReader readerData={selectedReader} />
+      <BooksListOfAuthor authorData={selectedAuthor} />
     </div>
   );
 };
 
-export default ReadersMangement;
+export default AuthorsMangement;
